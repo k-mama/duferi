@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DUFERI - 스킨케어</title>
+    <style>
+        /* 기본 초기화 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        ul {
+            list-style: none;
+        }
+
+        /* 헤더 및 네비게이션 스타일 (공통) */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            height: 80px;
+            border-bottom: 1px solid #eee;
+            background-color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        .main-menu {
+            display: flex;
+            gap: 40px;
+        }
+        .main-menu li a {
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .main-menu li a:hover {
+            color: #d4af37;
+        }
+        .utility-menu {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+        }
+
+        /* 제품 목록 페이지 특화 스타일 */
+        .page-header {
+            text-align: center;
+            padding: 60px 20px 40px;
+        }
+        .page-header h2 {
+            font-size: 36px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+        .page-header p {
+            color: #777;
+            font-size: 15px;
+        }
+
+        /* 카테고리 필터 메뉴 */
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 60px;
+            border-bottom: 1px solid #eaeaea;
+            padding-bottom: 20px;
+        }
+        .category-filter li a {
+            font-size: 14px;
+            color: #888;
+            font-weight: 500;
+            padding-bottom: 5px;
+        }
+        .category-filter li a.active,
+        .category-filter li a:hover {
+            color: #111;
+            border-bottom: 2px solid #111;
+        }
+
+        /* 제품 그리드 영역 */
+        .product-list-container {
+            max-width: 1200px;
+            margin: 0 auto 100px;
+            padding: 0 20px;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px 20px;
+        }
+
+        /* 개별 제품 카드 */
+        .product-card {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .product-image {
+            background-color: #f8f8f8;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #bbb;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #111;
+            color: #fff;
+            font-size: 11px;
+            padding: 4px 8px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .product-info {
+            text-align: center;
+        }
+        .product-name {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #222;
+        }
+        .product-desc {
+            font-size: 13px;
+            color: #777;
+            margin-bottom: 12px;
+        }
+        .product-price {
+            font-size: 15px;
+            font-weight: bold;
+            color: #111;
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 영역 -->
+    <header class="header">
+        <div class="logo"><a href="#">DUFERI</a></div>
+        <nav>
+            <ul class="main-menu">
+                <li><a href="#">NEW & BEST</a></li>
+                <li><a href="#">SKINCARE</a></li>
+                <li><a href="#">MAKEUP</a></li>
+                <li><a href="#">FRAGRANCE</a></li>
+                <li><a href="#">MEN</a></li>
+                <li><a href="#">BRAND STORY</a></li>
+            </ul>
+        </nav>
+        <nav>
+            <ul class="utility-menu">
+                <li><a href="#">로그인</a></li>
+                <li><a href="#">마이페이지</a></li>
+                <li><a href="#">장바구니</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h2>SKINCARE</h2>
+            <p>피부 본연의 힘을 깨워주는 DUFERI 스킨케어 컬렉션</p>
+        </div>
+
+        <!-- 카테고리 필터 -->
+        <ul class="category-filter">
+            <li><a href="#" class="active">ALL</a></li>
+            <li><a href="#">스킨/미스트</a></li>
+            <li><a href="#">세럼/에센스</a></li>
+            <li><a href="#">크림/아이크림</a></li>
+            <li><a href="#">클렌징</a></li>
+            <li><a href="#">선케어</a></li>
+        </ul>
+
+        <!-- 제품 목록 그리드 -->
+        <div class="product-list-container">
+            <div class="product-grid">
+                <!-- 제품 카드 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="badge">BEST</span>
+                        제품 이미지
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">유스 래디언스 세럼</h3>
+                        <p class="product-desc">광채와 탄력을 동시에 선사하는 안티에이징 세럼</p>
+                        <p class="product-price">125,000원</p>
+                    </div>
+                </div>
+
+                <!-- 제품 카드 2 ~ 4 (동일한 구조의 반복) -->
+                <!-- 실제 개발 시에는 서버에서 데이터를 받아와 JavaScript나 백엔드 템플릿 엔진으로 반복 렌더링합니다. -->
+                <div class="product-card"><div class="product-image"><span class="badge">NEW</span>제품 이미지</div><div class="product-info"><h3 class="product-name">하이드레이팅 에센스 워터</h3><p class="product-desc">피부 깊숙이 수분을 채워주는 첫 단계 에센스</p><p class="product-price">68,000원</p></div></div>
+                <div class="product-card"><div class="product-image">제품 이미지</div><div class="product-info"><h3 class="product-name">인텐시브 리페어 크림</h3><p class="product-desc">지친 피부를 보호하고 영양을 공급하는 고보습 크림</p><p class="product-price">150,000원</p></div></div>
+                <div class="product-card"><div class="product-image">제품 이미지</div><div class="product-info"><h3 class="product-name">젠틀 퓨리파잉 클렌저</h3><p class="product-desc">피부 노폐물을 부드럽게 씻어내는 약산성 폼 클렌저</p><p class="product-price">42,000원</p></div></div>
+                <div class="product-card"><div class="product-image">제품 이미지</div><div class="product-info"><h3 class="product-name">UV 프로텍터 멀티 디펜스</h3><p class="product-desc">강력한 자외선 차단과 피부 톤 보정 효과</p><p class="product-price">55,000원</p></div></div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DUFERI - 공식 온라인 몰</title>
+    <style>
+        /* 기본 초기화 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            color: #333;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        ul {
+            list-style: none;
+        }
+
+        /* 헤더 및 네비게이션 스타일 */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            height: 80px;
+            border-bottom: 1px solid #eee;
+            background-color: #fff;
+            position: sticky;
+            top: 0;
+        }
+
+        /* 로고 */
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        /* 메인 메뉴 */
+        .main-menu {
+            display: flex;
+            gap: 40px;
+        }
+        .main-menu li a {
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .main-menu li a:hover {
+            color: #d4af37; /* 호버 시 프리미엄 느낌의 골드 색상 */
+        }
+
+        /* 유틸리티 메뉴 (로그인, 장바구니 등) */
+        .utility-menu {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+        }
+
+        /* 메인 콘텐츠 영역 (예시) */
+        .hero-section {
+            height: 600px;
+            background-color: #f8f8f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .hero-section h1 {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 헤더 영역 -->
+    <header class="header">
+        <!-- 브랜드 로고 -->
+        <div class="logo">
+            <a href="#">DUFERI</a>
+        </div>
+
+        <!-- 메인 네비게이션 (헤라 사이트 구성 참고) -->
+        <nav>
+            <ul class="main-menu">
+                <li><a href="#">NEW & BEST</a></li>
+                <li><a href="#">SKINCARE</a></li>
+                <li><a href="#">MAKEUP</a></li>
+                <li><a href="#">FRAGRANCE</a></li>
+                <li><a href="#">MEN</a></li>
+                <li><a href="#">BRAND STORY</a></li>
+            </ul>
+        </nav>
+
+        <!-- 유틸리티 네비게이션 -->
+        <nav>
+            <ul class="utility-menu">
+                <li><a href="#">로그인</a></li>
+                <li><a href="#">마이페이지</a></li>
+                <li><a href="#">장바구니</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <main>
+        <section class="hero-section">
+            <h1>Discover Your Beauty</h1>
+            <p>DUFERI와 함께 당신만의 아름다움을 완성하세요.</p>
+        </section>
+    </main>
+
+</body>
+</html>

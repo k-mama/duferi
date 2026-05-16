@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DUFERI - 브랜드 스토리</title>
+    <style>
+        /* 기본 초기화 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        ul {
+            list-style: none;
+        }
+
+        /* 헤더 및 네비게이션 스타일 (공통) */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            height: 80px;
+            border-bottom: 1px solid #eee;
+            background-color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        .main-menu {
+            display: flex;
+            gap: 40px;
+        }
+        .main-menu li a {
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .main-menu li a:hover {
+            color: #d4af37;
+        }
+        .utility-menu {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+        }
+
+        /* 브랜드 스토리 특화 스타일 */
+        /* 1. 메인 비주얼 (Hero) */
+        .story-hero {
+            height: 80vh;
+            background-color: #111; /* 실제 적용 시 배경 이미지나 비디오로 대체 */
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+        .story-hero h2 {
+            font-size: 52px;
+            font-weight: 300;
+            letter-spacing: 6px;
+            margin-bottom: 24px;
+        }
+        .story-hero p {
+            font-size: 18px;
+            font-weight: 300;
+            color: #ddd;
+            letter-spacing: 1px;
+        }
+
+        /* 2. 브랜드 철학 (Text block) */
+        .philosophy {
+            padding: 120px 20px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .philosophy h3 {
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+        }
+        .philosophy p {
+            font-size: 17px;
+            line-height: 2;
+            color: #555;
+            word-break: keep-all;
+        }
+
+        /* 3. 브랜드 헤리티지/상세 (Image + Text) */
+        .heritage {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto 120px;
+            gap: 80px;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .heritage .image-wrap {
+            flex: 1;
+            height: 600px;
+            background-color: #f4f4f4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 14px;
+        }
+        .heritage .text-wrap {
+            flex: 1;
+        }
+        .heritage .text-wrap h3 {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+        .heritage .text-wrap p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 영역 -->
+    <header class="header">
+        <div class="logo"><a href="#">DUFERI</a></div>
+        <nav>
+            <ul class="main-menu">
+                <li><a href="#">NEW & BEST</a></li>
+                <li><a href="#">SKINCARE</a></li>
+                <li><a href="#">MAKEUP</a></li>
+                <li><a href="#">FRAGRANCE</a></li>
+                <li><a href="#">MEN</a></li>
+                <li><a href="#">BRAND STORY</a></li>
+            </ul>
+        </nav>
+        <nav>
+            <ul class="utility-menu">
+                <li><a href="#">로그인</a></li>
+                <li><a href="#">마이페이지</a></li>
+                <li><a href="#">장바구니</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- 히어로 비주얼 영역 -->
+        <section class="story-hero">
+            <h2>HERE, NOW, MYSELF</h2>
+            <p>지금, 여기, 그리고 나. DUFERI가 제안하는 컨템포러리 뷰티.</p>
+        </section>
+
+        <!-- 브랜드 철학 영역 -->
+        <section class="philosophy">
+            <h3>Find Your Own Beauty</h3>
+            <p>DUFERI는 각자가 가진 고유한 아름다움을 존중합니다.<br>인위적인 변화가 아닌, 본연의 매력을 끌어내어 가장 나다운 모습을 완성하는 것.<br>그것이 우리가 추구하는 진정한 아름다움의 가치입니다.</p>
+        </section>
+
+        <!-- 헤리티지 영역 -->
+        <section class="heritage">
+            <div class="image-wrap">이미지: 브랜드 무드컷 또는 모델 화보</div>
+            <div class="text-wrap">
+                <h3>Timeless Elegance</h3>
+                <p>수년간의 연구와 혁신적인 기술력을 바탕으로, 시간이 흘러도 변치 않는 아름다움을 선사합니다.</p>
+                <p>우리는 끊임없이 변화하는 트렌드 속에서도 흔들리지 않는 DUFERI만의 독창적인 감각을 만들어갑니다. 최상의 원료와 세심한 터치가 깃든 제품으로 당신의 일상에 특별한 영감을 더해드립니다.</p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
