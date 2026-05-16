@@ -41,6 +41,10 @@
         .toast-popup { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(40px); background-color: rgba(17, 17, 17, 0.9); color: #fff; padding: 15px 30px; border-radius: 5px; font-size: 15px; font-weight: 500; z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
         .toast-popup.show { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
 
+        /* 스크롤 등장 애니메이션 */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
         /* 추가된 마이페이지 스타일 */
         .profile-section { display: flex; align-items: center; justify-content: space-between; padding: 30px; background-color: #111; color: #fff; margin-bottom: 40px; text-align: left; }
         .profile-info h2 { font-size: 24px; font-weight: 300; margin-bottom: 10px; }
@@ -62,29 +66,10 @@
     </style>
 </head>
 <body>
-    <!-- 헤더 영역 -->
-    <header class="header">
-        <div class="logo"><a href="index.html">DUFERI</a></div>
-        <button class="mobile-menu-toggle">☰</button>
-        <nav>
-            <ul class="main-menu">
-                <li><a href="brand-story.html">DUFERI STORY</a></li>
-                <li><a href="new-best.html">NEW & BEST</a></li>
-                <li><a href="skincare.html">SKINCARE</a></li>
-                <li><a href="makeup.html">MAKEUP</a></li>
-                <li><a href="homme.html">HOMME</a></li>
-            </ul>
-        </nav>
-        <nav>
-            <ul class="utility-menu">
-                <li><a href="login.html">로그인</a></li>
-                <li><a href="mypage.html">마이페이지</a></li>
-                <li><a href="cart.html">장바구니<span id="cartBadge" class="cart-badge">0</span></a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- 공통 헤더 삽입 영역 -->
+    <div id="header-container"></div>
 
-    <main style="max-width: 800px; margin: 100px auto; text-align: center; padding: 0 20px;">
+    <main class="reveal" style="max-width: 800px; margin: 100px auto; text-align: center; padding: 0 20px;">
         <h1 style="margin-bottom: 50px; font-weight: 300; letter-spacing: 2px;">MY PAGE</h1>
         
         <!-- 프로필 영역 -->
@@ -139,70 +124,7 @@
         <a href="index.html" style="color: #111; text-decoration: underline; font-size: 14px;">메인으로 돌아가기</a>
     </main>
 
-    <!-- 모바일 메뉴 오버레이 -->
-    <div class="mobile-overlay" id="mobileOverlay"></div>
-
-    <!-- 모바일 사이드 드로어 -->
-    <div class="mobile-drawer" id="mobileDrawer">
-        <div class="drawer-header">
-            <div class="drawer-logo">DUFERI</div>
-            <button class="drawer-close" id="drawerClose">✕</button>
-        </div>
-        <ul class="drawer-menu">
-            <li><a href="brand-story.html">DUFERI STORY <span class="plus">+</span></a></li>
-            <li><a href="new-best.html">NEW & BEST <span class="plus">+</span></a></li>
-            <li><a href="skincare.html">SKINCARE <span class="plus">+</span></a></li>
-            <li><a href="makeup.html">MAKEUP <span class="plus">+</span></a></li>
-            <li><a href="homme.html">HOMME <span class="plus">+</span></a></li>
-        </ul>
-    </div>
-
-    <!-- 토스트 팝업 -->
-    <div id="toastPopup" class="toast-popup">알림 메시지</div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var toggleBtn = document.querySelector('.mobile-menu-toggle');
-            var closeBtn = document.getElementById('drawerClose');
-            var drawer = document.getElementById('mobileDrawer');
-            var overlay = document.getElementById('mobileOverlay');
-
-            function openDrawer() {
-                if(drawer && overlay) {
-                    drawer.classList.add('open');
-                    overlay.classList.add('open');
-                    document.body.style.overflow = 'hidden';
-                }
-            }
-
-            function closeDrawer() {
-                if(drawer && overlay) {
-                    drawer.classList.remove('open');
-                    overlay.classList.remove('open');
-                    document.body.style.overflow = '';
-                }
-            }
-
-            if(toggleBtn) toggleBtn.addEventListener('click', openDrawer);
-            if(closeBtn) closeBtn.addEventListener('click', closeDrawer);
-            if(overlay) overlay.addEventListener('click', closeDrawer);
-
-            // 장바구니 배지 동기화
-            var cartBadge = document.getElementById('cartBadge'), savedCount = localStorage.getItem('cartCount');
-            if (savedCount && parseInt(savedCount, 10) > 0 && cartBadge) { cartBadge.textContent = savedCount; cartBadge.classList.add('active'); }
-
-            // 전역 토스트 팝업 함수
-            var toastTimeout;
-            window.showToast = function(message) {
-                var toast = document.getElementById('toastPopup');
-                if (toast) {
-                    if (message) toast.textContent = message;
-                    toast.classList.add('show');
-                    clearTimeout(toastTimeout);
-                    toastTimeout = setTimeout(function() { toast.classList.remove('show'); }, 3000);
-                }
-            };
-        });
-    </script>
+    <!-- 공통 스크립트 -->
+    <script src="common.js"></script>
 </body>
 </html>

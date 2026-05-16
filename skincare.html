@@ -32,7 +32,9 @@
             padding: 0 40px;
             height: 80px;
             border-bottom: 1px solid #eee;
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -60,7 +62,7 @@
             font-size: 13px;
         }
 
-ㄹ        /* 장바구니 배지 스타일 */
+        /* 장바구니 배지 스타일 */
         .cart-badge {
             background-color: #d4af37;
             color: #fff;
@@ -76,6 +78,10 @@
         /* 토스트 팝업 스타일 */
         .toast-popup { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(40px); background-color: rgba(17, 17, 17, 0.9); color: #fff; padding: 15px 30px; border-radius: 5px; font-size: 15px; font-weight: 500; z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
         .toast-popup.show { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+
+        /* 스크롤 등장 애니메이션 */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* 제품 목록 페이지 특화 스타일 */
         .page-header {
@@ -158,6 +164,15 @@
             font-weight: bold;
             letter-spacing: 1px;
         }
+        
+        /* 상품 이미지 확대 효과 */
+        .product-image img, .img-placeholder {
+            transition: transform 0.4s ease;
+        }
+        .product-card:hover .product-image img, .product-card:hover .img-placeholder {
+            transform: scale(1.08);
+        }
+
         .add-to-cart-btn {
             position: absolute;
             bottom: -55px; /* 기본 상태에서는 아래로 숨김 */
@@ -227,63 +242,55 @@
                 margin-bottom: 40px;
             }
             .product-grid {
-                grid-template-columns: 1fr; /* 제품 카드 1열 배치 */
-                gap: 40px 20px;
+                grid-template-columns: repeat(2, 1fr); /* 모바일 쇼핑몰 최적화: 2열 배치 */
+                gap: 30px 10px;
             }
             .product-image {
-                height: 100vw;
-                max-height: 350px;
+                height: 200px; /* 2열 배치에 맞춘 이미지 높이 */
+            }
+            .product-name {
+                font-size: 14px;
+            }
+            .product-price {
+                font-size: 13px;
+            }
+            .add-to-cart-btn {
+                padding: 10px 0;
+                font-size: 13px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- 헤더 영역 -->
-    <header class="header">
-        <div class="logo"><a href="index.html">DUFERI</a></div>
-        <button class="mobile-menu-toggle">☰</button>
-        <nav>
-            <ul class="main-menu">
-                <li><a href="brand-story.html">DUFERI STORY</a></li>
-                <li><a href="new-best.html">NEW & BEST</a></li>
-                <li><a href="skincare.html">SKINCARE</a></li>
-                <li><a href="makeup.html">MAKEUP</a></li>
-                <li><a href="homme.html">HOMME</a></li>
-            </ul>
-        </nav>
-        <nav>
-            <ul class="utility-menu">
-                <li><a href="login.html">로그인</a></li>
-                <li><a href="mypage.html">마이페이지</a></li>
-                <li><a href="cart.html">장바구니<span id="cartBadge" class="cart-badge">0</span></a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- 공통 헤더 삽입 영역 -->
+    <div id="header-container"></div>
 
     <main>
-        <div class="page-header">
+        <div class="page-header reveal">
             <h2>SKINCARE</h2>
             <p>피부 본연의 힘을 깨워주는 DUFERI 스킨케어 컬렉션</p>
         </div>
 
         <!-- 카테고리 필터 -->
-        <ul class="category-filter">
-            <li><a href="#" class="active">ALL</a></li>
-            <li><a href="#">스킨/미스트</a></li>
-            <li><a href="#">세럼/에센스</a></li>
-            <li><a href="#">크림/아이크림</a></li>
-            <li><a href="#">클렌징</a></li>
-            <li><a href="#">선케어</a></li>
+        <ul class="category-filter reveal">
+            <li><a href="#" class="active" data-filter="all">ALL</a></li>
+            <li><a href="#" data-filter="best">BEST</a></li>
+            <li><a href="#" data-filter="new">NEW</a></li>
+            <li><a href="#" data-filter="스킨/미스트">스킨/미스트</a></li>
+            <li><a href="#" data-filter="세럼/에센스">세럼/에센스</a></li>
+            <li><a href="#" data-filter="크림/아이크림">크림/아이크림</a></li>
+            <li><a href="#" data-filter="클렌징">클렌징</a></li>
+            <li><a href="#" data-filter="선케어">선케어</a></li>
         </ul>
 
         <!-- 제품 목록 그리드 -->
-        <div class="product-list-container">
+        <div class="product-list-container reveal">
             <div class="product-grid">
                 <!-- 제품 카드 1 -->
                 <a href="product-detail.html" class="product-card">
                     <div class="product-image">
                         <span class="badge">BEST</span>
-                        제품 이미지
+                        <span class="img-placeholder">제품 이미지</span>
                         <button class="add-to-cart-btn">장바구니 담기</button>
                     </div>
                     <div class="product-info">
@@ -295,10 +302,14 @@
 
                 <!-- 제품 카드 2 ~ 4 (동일한 구조의 반복) -->
                 <!-- 실제 개발 시에는 서버에서 데이터를 받아와 JavaScript나 백엔드 템플릿 엔진으로 반복 렌더링합니다. -->
-                <a href="product-detail.html" class="product-card"><div class="product-image"><span class="badge">NEW</span>제품 이미지<button class="add-to-cart-btn">장바구니 담기</button></div><div class="product-info"><h3 class="product-name">하이드레이팅 에센스 워터</h3><p class="product-desc">피부 깊숙이 수분을 채워주는 첫 단계 에센스</p><p class="product-price">68,000원</p></div></a>
-                <a href="product-detail.html" class="product-card"><div class="product-image">제품 이미지<button class="add-to-cart-btn">장바구니 담기</button></div><div class="product-info"><h3 class="product-name">인텐시브 리페어 크림</h3><p class="product-desc">지친 피부를 보호하고 영양을 공급하는 고보습 크림</p><p class="product-price">150,000원</p></div></a>
-                <a href="product-detail.html" class="product-card"><div class="product-image">제품 이미지<button class="add-to-cart-btn">장바구니 담기</button></div><div class="product-info"><h3 class="product-name">젠틀 퓨리파잉 클렌저</h3><p class="product-desc">피부 노폐물을 부드럽게 씻어내는 약산성 폼 클렌저</p><p class="product-price">42,000원</p></div></a>
-                <a href="product-detail.html" class="product-card"><div class="product-image">제품 이미지<button class="add-to-cart-btn">장바구니 담기</button></div><div class="product-info"><h3 class="product-name">UV 프로텍터 멀티 디펜스</h3><p class="product-desc">강력한 자외선 차단과 피부 톤 보정 효과</p><p class="product-price">55,000원</p></div></a>
+                <a href="product-detail.html" class="product-card"><div class="product-image"><span class="badge">NEW</span><span class="img-placeholder">제품 이미지</span><button class="add-to-cart-btn">장바구니 담기</button></div><div class="product-info"><h3 class="product-name">하이드레이팅 에센스 워터</h3><p class="product-desc">피부 깊숙이 수분을 채워주는 첫 단계 에센스</p><p class="product-price">68,000원</p></div></a>
+                <a href="product-detail.html" class="product-card"><div class="product-image"><span class="img-placeholder">제품 이미지</span><button class="add-to-cart-btn">장바구니 담기</button></div><div class="product-info"><h3 class="product-name">인텐시브 리페어 크림</h3><p class="product-desc">지친 피부를 보호하고 영양을 공급하는 고보습 크림</p><p class="product-price">150,000원</p></div></a>
+                <a href="product-detail.html" class="product-card"><div class="product-image"><span class="img-placeholder">제품 이미지</span><button class="add-to-cart-btn">장바구니 담기</button></div><div class="product-info"><h3 class="product-name">젠틀 퓨리파잉 클렌저</h3><p class="product-desc">피부 노폐물을 부드럽게 씻어내는 약산성 폼 클렌저</p><p class="product-price">42,000원</p></div></a>
+                <a href="product-detail.html" class="product-card"><div class="product-image"><span class="img-placeholder">제품 이미지</span><button class="add-to-cart-btn">장바구니 담기</button></div><div class="product-info"><h3 class="product-name">UV 프로텍터 멀티 디펜스</h3><p class="product-desc">강력한 자외선 차단과 피부 톤 보정 효과</p><p class="product-price">55,000원</p></div></a>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <button id="loadMoreBtn" style="padding: 16px 40px; background: #fff; color: #111; border: 1px solid #111; cursor: pointer; font-size: 14px; font-weight: bold; transition: background 0.3s ease;">더보기 (Load More)</button>
             </div>
         </div>
     </main>
@@ -314,10 +325,13 @@
         </div>
         <ul class="drawer-menu">
             <li><a href="brand-story.html">DUFERI STORY <span class="plus">+</span></a></li>
-            <li><a href="new-best.html">NEW & BEST <span class="plus">+</span></a></li>
+            <li><a href="homme.html">HOMME <span class="plus">+</span></a></li>
             <li><a href="skincare.html">SKINCARE <span class="plus">+</span></a></li>
             <li><a href="makeup.html">MAKEUP <span class="plus">+</span></a></li>
-            <li><a href="homme.html">HOMME <span class="plus">+</span></a></li>
+            <li><a href="new-best.html">NEW & BEST <span class="plus">+</span></a></li>
+            <li style="border-top: 1px solid #ddd; margin-top: 10px;"><a href="login.html" style="color: #666; font-size: 14px;">로그인</a></li>
+            <li><a href="mypage.html" style="color: #666; font-size: 14px;">마이페이지</a></li>
+            <li><a href="cart.html" style="color: #666; font-size: 14px;">장바구니 <span class="cart-badge">0</span></a></li>
         </ul>
     </div>
 
@@ -353,16 +367,16 @@
 
             // 장바구니 담기 배지 카운트 기능
             var addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
-            var cartBadge = document.getElementById('cartBadge');
             var cartCount = 0;
 
             // 스킨케어 페이지에서도 localStorage를 읽어 배지를 동기화
             var savedCount = localStorage.getItem('cartCount');
             if (savedCount) {
                 cartCount = parseInt(savedCount, 10);
-                if (cartCount > 0 && cartBadge) {
-                    cartBadge.textContent = cartCount;
-                    cartBadge.classList.add('active');
+                if (cartCount > 0) {
+                    document.querySelectorAll('.cart-badge').forEach(function(badge) {
+                        badge.textContent = cartCount; badge.classList.add('active');
+                    });
                 }
             }
 
@@ -383,13 +397,84 @@
                     e.stopPropagation(); // 클릭 이벤트가 부모(카드)로 전파되는 것 방지
                     cartCount++;
                     localStorage.setItem('cartCount', cartCount); // 장바구니 개수 저장
-                    if(cartBadge) {
-                        cartBadge.textContent = cartCount;
-                        cartBadge.classList.add('active');
-                    }
+                    document.querySelectorAll('.cart-badge').forEach(function(badge) {
+                        badge.textContent = cartCount; badge.classList.add('active');
+                    });
                     if(window.showToast) window.showToast('장바구니에 담겼습니다');
                 });
             });
+
+            // 상품 필터링 기능 (BEST, NEW 등)
+            var filterLinks = document.querySelectorAll('.category-filter a');
+            var productCards = document.querySelectorAll('.product-card');
+
+            filterLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 활성화 탭 변경
+                    filterLinks.forEach(function(l) { l.classList.remove('active'); });
+                    this.classList.add('active');
+
+                    var filterValue = this.getAttribute('data-filter');
+
+                    productCards.forEach(function(card) {
+                        if (filterValue === 'all') {
+                            card.style.display = 'flex';
+                        } else if (filterValue === 'best' || filterValue === 'new') {
+                            var badge = card.querySelector('.badge');
+                            if (badge && badge.textContent.trim().toUpperCase() === filterValue.toUpperCase()) {
+                                card.style.display = 'flex';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        } else {
+                            // 데모용으로 다른 카테고리는 우선 숨김 처리
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // 스크롤 등장 애니메이션 (Intersection Observer)
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+
+            // 더보기 (Load More) 기능
+            var loadMoreBtn = document.getElementById('loadMoreBtn');
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', function() {
+                    var grid = document.querySelector('.product-grid');
+                    var dummyHTML = '<div class="product-image"><span class="badge" style="background-color:#888;">NEW</span><span class="img-placeholder">추가된 상품</span><button class="add-to-cart-btn">장바구니 담기</button></div><div class="product-info"><h3 class="product-name">수딩 릴리프 크림</h3><p class="product-desc">민감해진 피부를 빠르게 진정시키는 크림</p><p class="product-price">52,000원</p></div>';
+                    
+                    for(var i=0; i<2; i++) {
+                        var newCard = document.createElement('a');
+                        newCard.href = 'product-detail.html';
+                        newCard.className = 'product-card reveal';
+                        newCard.innerHTML = dummyHTML;
+                        grid.appendChild(newCard);
+                        if (typeof observer !== 'undefined') observer.observe(newCard); // 애니메이션 적용
+                        
+                        var newCartBtn = newCard.querySelector('.add-to-cart-btn');
+                        newCartBtn.addEventListener('click', function(e) {
+                            e.preventDefault(); e.stopPropagation();
+                            var count = parseInt(localStorage.getItem('cartCount') || '0', 10) + 1;
+                            localStorage.setItem('cartCount', count);
+                            document.querySelectorAll('.cart-badge').forEach(function(b) {
+                                b.textContent = count; b.classList.add('active');
+                            });
+                            if (window.showToast) window.showToast('장바구니에 담겼습니다');
+                        });
+                    }
+                });
+            }
         });
     </script>
 </body>

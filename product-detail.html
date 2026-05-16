@@ -4,12 +4,234 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DUFERI - 상품 상세</title>
+    <style>
+        /* 기본 초기화 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; color: #333; line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* 공통 헤더 스타일 */
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 0 40px; height: 80px; border-bottom: 1px solid #eee; background-color: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 28px; font-weight: bold; letter-spacing: 2px; }
+        .main-menu { display: flex; gap: 40px; }
+        .main-menu li a { font-size: 15px; font-weight: 500; transition: color 0.3s ease; }
+        .main-menu li a:hover { color: #d4af37; }
+        .utility-menu { display: flex; gap: 20px; font-size: 13px; }
+
+        /* 장바구니 배지 스타일 */
+        .cart-badge { background-color: #d4af37; color: #fff; font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 10px; margin-left: 5px; display: none; }
+        .cart-badge.active { display: inline-block; }
+
+        /* 토스트 팝업 스타일 */
+        .toast-popup { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(40px); background-color: rgba(17, 17, 17, 0.9); color: #fff; padding: 15px 30px; border-radius: 5px; font-size: 15px; font-weight: 500; z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .toast-popup.show { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+
+        /* 스크롤 등장 애니메이션 */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* 상품 상세 페이지 특화 스타일 */
+        .product-detail-container { max-width: 1200px; margin: 80px auto; padding: 0 20px; display: flex; gap: 80px; align-items: flex-start; }
+        .product-gallery { flex: 1; background-color: #f8f8f8; height: 650px; display: flex; justify-content: center; align-items: center; color: #bbb; font-size: 16px; width: 100%; }
+        .product-info-wrap { flex: 1; display: flex; flex-direction: column; padding-top: 20px; }
+        
+        .product-badge { font-size: 13px; font-weight: bold; letter-spacing: 1px; margin-bottom: 15px; color: #d4af37; }
+        .product-title { font-size: 36px; font-weight: 300; margin-bottom: 20px; color: #111; letter-spacing: -0.5px; }
+        .product-description { font-size: 16px; color: #666; margin-bottom: 40px; line-height: 1.8; word-break: keep-all; }
+        .product-price-wrap { font-size: 28px; font-weight: bold; color: #111; margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 40px; }
+        
+        /* 수량 조절 폼 스타일 */
+        .purchase-form { display: flex; flex-direction: column; gap: 30px; }
+        .quantity-wrapper { display: flex; align-items: center; justify-content: space-between; background-color: #f9f9f9; padding: 20px; border: 1px solid #eaeaea; }
+        .quantity-label { font-size: 14px; font-weight: 500; color: #333; }
+        .quantity-selector { display: flex; align-items: center; border: 1px solid #ddd; background-color: #fff; }
+        .qty-btn { width: 40px; height: 40px; background: transparent; border: none; font-size: 18px; cursor: pointer; color: #555; }
+        .qty-btn:hover { background-color: #f0f0f0; }
+        .qty-input { width: 50px; height: 40px; border: none; border-left: 1px solid #ddd; border-right: 1px solid #ddd; text-align: center; font-size: 15px; font-weight: bold; outline: none; }
+        /* input number의 기본 화살표 숨김 */
+        .qty-input::-webkit-outer-spin-button, .qty-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        
+        /* 버튼 영역 */
+        .action-buttons { display: flex; gap: 15px; margin-top: 10px; }
+        .btn { flex: 1; padding: 22px 0; font-size: 16px; font-weight: bold; cursor: pointer; text-align: center; transition: all 0.3s ease; border: 1px solid #111; }
+        .btn-cart { background-color: #fff; color: #111; }
+        .btn-cart:hover { background-color: #f9f9f9; }
+        .btn-buy { background-color: #111; color: #fff; }
+        .btn-buy:hover { background-color: #333; }
+
+        /* 리뷰 영역 스타일 */
+        .review-section { max-width: 1200px; margin: 0 auto 100px; padding: 0 20px; }
+        .review-header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid #111; padding-bottom: 20px; margin-bottom: 40px; }
+        .review-header h2 { font-size: 24px; font-weight: 500; }
+        .review-summary { display: flex; align-items: center; gap: 15px; }
+        .review-score { font-size: 32px; font-weight: bold; color: #111; }
+        .review-stars { color: #d4af37; font-size: 20px; letter-spacing: 2px; }
+        .review-count { font-size: 14px; color: #777; }
+        
+        .review-list { display: flex; flex-direction: column; gap: 30px; }
+        .review-item { border-bottom: 1px solid #eee; padding-bottom: 30px; }
+        .review-item-header { display: flex; justify-content: space-between; margin-bottom: 15px; }
+        .review-user-info { display: flex; gap: 10px; align-items: center; font-size: 14px; color: #555; }
+        .review-user-stars { color: #d4af37; font-size: 14px; }
+        .review-date { font-size: 13px; color: #999; }
+        .review-text { font-size: 15px; color: #333; line-height: 1.6; }
+
+        /* 모바일 대응 (공통 및 상세) */
+        .mobile-menu-toggle { display: none; background: none; border: none; font-size: 28px; cursor: pointer; color: #333; min-height: 44px; padding: 0 10px; }
+        .mobile-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.5); z-index: 999; opacity: 0; transition: opacity 0.3s ease; }
+        .mobile-overlay.open { display: block; opacity: 1; }
+        .mobile-drawer { position: fixed; top: 0; right: -100%; width: 75%; height: 100vh; background: #fff; z-index: 1000; transition: right 0.3s ease; display: flex; flex-direction: column; box-shadow: -5px 0 15px rgba(0,0,0,0.1); }
+        .mobile-drawer.open { right: 0; }
+        .drawer-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #eee; }
+        .drawer-logo { font-size: 20px; font-weight: bold; letter-spacing: 2px; }
+        .drawer-close { background: none; border: none; font-size: 24px; cursor: pointer; color: #333; padding: 5px; }
+        .drawer-menu { display: flex; flex-direction: column; margin: 0; padding: 0; overflow-y: auto; }
+        .drawer-menu li a { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #f5f5f5; font-size: 16px; font-weight: 500; }
+        .drawer-menu li a .plus { font-size: 22px; font-weight: 300; color: #999; }
+        img { max-width: 100%; height: auto; }
+
+        @media (max-width: 768px) {
+            .header nav { display: none; }
+            .header { padding: 0 20px; }
+            .mobile-menu-toggle { display: block; }
+            
+            .product-detail-container { flex-direction: column; gap: 40px; margin: 40px auto; }
+            .product-gallery { height: 100vw; max-height: 450px; }
+            .product-title { font-size: 28px; }
+            .product-price-wrap { font-size: 24px; }
+            .action-buttons { flex-direction: column; gap: 10px; }
+            .btn { padding: 18px 0; }
+            
+            .review-header { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .review-score { font-size: 28px; }
+        }
+    </style>
 </head>
 <body>
-    <div style="text-align: center; padding: 100px;">
-        <h1>PRODUCT DETAIL</h1>
-        <p>상품 상세 페이지가 준비 중입니다.</p>
-        <a href="skincare.html" style="color: #333; text-decoration: underline;">스킨케어 목록으로 돌아가기</a>
-    </div>
+    <!-- 공통 헤더 삽입 영역 -->
+    <div id="header-container"></div>
+
+    <main class="product-detail-container reveal">
+        <!-- 상품 이미지 갤러리 -->
+        <div class="product-gallery">
+            <p>상품 큼직한 메인 이미지 (가로 600px 이상)</p>
+        </div>
+
+        <!-- 상품 상세 정보 및 폼 -->
+        <div class="product-info-wrap">
+            <div class="product-badge">BEST SELLER</div>
+            <h1 class="product-title">유스 래디언스 세럼 50ml</h1>
+            <p class="product-description">피부 깊숙이 스며들어 맑고 투명한 광채와 탄력을 동시에 선사하는 고농축 안티에이징 세럼입니다. 매일 아침과 저녁, 토너 사용 후 부드럽게 펴 발라주세요.</p>
+            <div class="product-price-wrap" id="productPrice" data-price="125000">125,000원</div>
+
+            <form class="purchase-form" id="purchaseForm">
+                <div class="quantity-wrapper">
+                    <span class="quantity-label">수량 선택</span>
+                    <div class="quantity-selector">
+                        <button type="button" class="qty-btn" id="btnMinus">-</button>
+                        <input type="number" id="inputQuantity" class="qty-input" value="1" min="1" max="99" readonly>
+                        <button type="button" class="qty-btn" id="btnPlus">+</button>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button type="button" class="btn btn-cart" id="btnAddToCart">장바구니 담기</button>
+                    <button type="submit" class="btn btn-buy">바로 구매</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- 리뷰 영역 -->
+    <section class="review-section reveal">
+        <div class="review-header">
+            <h2>고객 리뷰</h2>
+            <div class="review-summary">
+                <span class="review-stars">★★★★★</span>
+                <span class="review-score">4.8</span>
+                <span class="review-count">(128개의 리뷰)</span>
+            </div>
+        </div>
+        <div class="review-list">
+            <div class="review-item">
+                <div class="review-item-header">
+                    <div class="review-user-info"><span class="review-user-stars">★★★★★</span><span class="review-user-id">kim**</span></div>
+                    <span class="review-date">2023.10.28</span>
+                </div>
+                <p class="review-text">피부에 겉돌지 않고 싹 스며들어서 너무 좋아요! 아침에 일어나면 피부 결이 다릅니다. 꾸준히 써볼 예정이에요.</p>
+            </div>
+            <div class="review-item">
+                <div class="review-item-header">
+                    <div class="review-user-info"><span class="review-user-stars">★★★★☆</span><span class="review-user-id">lee**</span></div>
+                    <span class="review-date">2023.10.15</span>
+                </div>
+                <p class="review-text">향도 고급스럽고 보습력도 뛰어납니다. 다만 가격이 조금 있어서 아껴 쓰고 있어요. 패키징도 너무 예뻐서 화장대에 올려두기 좋네요.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 공통 스크립트 -->
+    <script src="common.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var btnMinus = document.getElementById('btnMinus');
+            var btnPlus = document.getElementById('btnPlus');
+            var inputQuantity = document.getElementById('inputQuantity');
+            var btnAddToCart = document.getElementById('btnAddToCart');
+            var productPriceEl = document.getElementById('productPrice');
+
+            // 총 결제금액 업데이트 함수
+            function updateTotalPrice() {
+                if (productPriceEl && inputQuantity) {
+                    var basePrice = parseInt(productPriceEl.getAttribute('data-price'), 10);
+                    var qty = parseInt(inputQuantity.value, 10);
+                    var total = basePrice * qty;
+                    productPriceEl.textContent = total.toLocaleString() + '원';
+                }
+            }
+
+            if (btnMinus && btnPlus && inputQuantity) {
+                btnMinus.addEventListener('click', function() {
+                    var currentVal = parseInt(inputQuantity.value, 10);
+                    if (currentVal > 1) {
+                        inputQuantity.value = currentVal - 1;
+                        updateTotalPrice();
+                    }
+                });
+                btnPlus.addEventListener('click', function() {
+                    var currentVal = parseInt(inputQuantity.value, 10);
+                    if (currentVal < 99) {
+                        inputQuantity.value = currentVal + 1;
+                        updateTotalPrice();
+                    }
+                });
+            }
+
+            if (btnAddToCart) {
+                btnAddToCart.addEventListener('click', function() {
+                    var addQty = parseInt(inputQuantity.value, 10);
+                    var currentCartCount = parseInt(localStorage.getItem('cartCount') || '0', 10);
+                    
+                    // 기존 장바구니 수량에 이번에 선택한 수량을 더해서 저장
+                    localStorage.setItem('cartCount', currentCartCount + addQty);
+                    
+                    updateCartBadge(); // 헤더 배지 업데이트
+                    if (window.showToast) window.showToast('장바구니에 ' + addQty + '개 담겼습니다');
+                });
+            }
+
+            // 스크롤 등장 애니메이션 (Intersection Observer)
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+        });
+    </script>
 </body>
 </html>

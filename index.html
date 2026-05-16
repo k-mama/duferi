@@ -31,9 +31,12 @@
             padding: 0 40px;
             height: 80px;
             border-bottom: 1px solid #eee;
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
+            z-index: 100;
         }
 
         /* 로고 */
@@ -81,6 +84,31 @@
     .toast-popup { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(40px); background-color: rgba(17, 17, 17, 0.9); color: #fff; padding: 15px 30px; border-radius: 5px; font-size: 15px; font-weight: 500; z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
     .toast-popup.show { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
 
+    /* 스크롤 등장 애니메이션 */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
+    /* 베스트셀러 슬라이더 (메인페이지 전용) */
+    .bestseller-section { max-width: 1200px; margin: 100px auto; padding: 0 20px; }
+    .bestseller-section h2 { text-align: center; font-size: 32px; font-weight: 300; margin-bottom: 40px; letter-spacing: 2px; }
+    .slider-wrap { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 20px; padding-bottom: 20px; scrollbar-width: none; }
+    .slider-wrap::-webkit-scrollbar { display: none; }
+    .slider-item { flex: 0 0 calc(25% - 15px); scroll-snap-align: start; text-decoration: none; color: inherit; display: flex; flex-direction: column; cursor: pointer; transition: transform 0.3s ease; }
+    .slider-item:hover { transform: translateY(-5px); }
+    .slider-image { background-color: #f8f8f8; height: 300px; display: flex; justify-content: center; align-items: center; color: #bbb; margin-bottom: 20px; position: relative; overflow: hidden; }
+    .slider-image .img-placeholder { transition: transform 0.4s ease; }
+    .slider-item:hover .slider-image .img-placeholder { transform: scale(1.08); }
+    .slider-badge { position: absolute; top: 10px; left: 10px; background-color: #111; color: #fff; font-size: 11px; padding: 4px 8px; font-weight: bold; letter-spacing: 1px; }
+    .slider-info { text-align: center; }
+    .slider-name { font-size: 16px; font-weight: 500; margin-bottom: 8px; color: #222; }
+    .slider-desc { font-size: 13px; color: #777; margin-bottom: 12px; }
+    .slider-price { font-size: 15px; font-weight: bold; color: #111; }
+    @media (max-width: 768px) {
+        .slider-item { flex: 0 0 calc(50% - 10px); }
+        .slider-image { height: 200px; }
+        .bestseller-section h2 { font-size: 28px; }
+    }
+
     /* --- 모바일 오프캔버스 메뉴 및 반응형 CSS --- */
     .mobile-menu-toggle { display: none; background: none; border: none; font-size: 28px; cursor: pointer; color: #333; min-height: 44px; padding: 0 10px; }
     .mobile-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.5); z-index: 999; opacity: 0; transition: opacity 0.3s ease; }
@@ -119,109 +147,45 @@
     </style>
 </head>
 <body>
-
-    <!-- 헤더 영역 -->
-    <header class="header">
-        <!-- 브랜드 로고 -->
-        <div class="logo">
-            <a href="index.html">DUFERI</a>
-        </div>
-        <button class="mobile-menu-toggle">☰</button>
-
-        <!-- 메인 네비게이션 (헤라 사이트 구성 참고) -->
-        <nav>
-            <ul class="main-menu">
-                <li><a href="brand-story.html">DUFERI STORY</a></li>
-                <li><a href="new-best.html">NEW & BEST</a></li>
-                <li><a href="skincare.html">SKINCARE</a></li>
-                <li><a href="makeup.html">MAKEUP</a></li>
-                <li><a href="homme.html">HOMME</a></li>
-            </ul>
-        </nav>
-
-        <!-- 유틸리티 네비게이션 -->
-        <nav>
-            <ul class="utility-menu">
-                <li><a href="login.html">로그인</a></li>
-                <li><a href="mypage.html">마이페이지</a></li>
-                <li><a href="cart.html">장바구니<span id="cartBadge" class="cart-badge">0</span></a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- 공통 헤더 삽입 영역 -->
+    <div id="header-container"></div>
 
     <!-- 메인 콘텐츠 영역 -->
     <main>
-        <section class="hero-section">
+        <section class="hero-section reveal">
             <h1>Discover Your Beauty</h1>
             <p>DUFERI와 함께 당신만의 아름다움을 완성하세요.</p>
         </section>
+
+        <!-- 베스트셀러 슬라이더 캐러셀 영역 -->
+        <section class="bestseller-section reveal">
+            <h2>BEST SELLERS</h2>
+            <div class="slider-wrap">
+                <a href="product-detail.html" class="slider-item">
+                    <div class="slider-image"><span class="slider-badge">BEST</span><span class="img-placeholder">제품 이미지</span></div>
+                    <div class="slider-info"><h3 class="slider-name">유스 래디언스 세럼</h3><p class="slider-desc">광채와 탄력을 선사하는 세럼</p><p class="slider-price">125,000원</p></div>
+                </a>
+                <a href="product-detail.html" class="slider-item">
+                    <div class="slider-image"><span class="slider-badge">BEST</span><span class="img-placeholder">제품 이미지</span></div>
+                    <div class="slider-info"><h3 class="slider-name">인텐시브 리페어 크림</h3><p class="slider-desc">고보습 영양 크림</p><p class="slider-price">150,000원</p></div>
+                </a>
+                <a href="product-detail.html" class="slider-item">
+                    <div class="slider-image"><span class="img-placeholder">제품 이미지</span></div>
+                    <div class="slider-info"><h3 class="slider-name">하이드레이팅 에센스 워터</h3><p class="slider-desc">피부 깊숙이 수분을 채우는 에센스</p><p class="slider-price">68,000원</p></div>
+                </a>
+                <a href="product-detail.html" class="slider-item">
+                    <div class="slider-image"><span class="slider-badge">NEW</span><span class="img-placeholder">제품 이미지</span></div>
+                    <div class="slider-info"><h3 class="slider-name">UV 프로텍터 멀티 디펜스</h3><p class="slider-desc">자외선 차단 및 톤 보정</p><p class="slider-price">55,000원</p></div>
+                </a>
+                <a href="product-detail.html" class="slider-item">
+                    <div class="slider-image"><span class="img-placeholder">제품 이미지</span></div>
+                    <div class="slider-info"><h3 class="slider-name">젠틀 퓨리파잉 클렌저</h3><p class="slider-desc">약산성 폼 클렌저</p><p class="slider-price">42,000원</p></div>
+                </a>
+            </div>
+        </section>
     </main>
 
-    <!-- 모바일 메뉴 오버레이 -->
-    <div class="mobile-overlay" id="mobileOverlay"></div>
-
-    <!-- 모바일 사이드 드로어 -->
-    <div class="mobile-drawer" id="mobileDrawer">
-        <div class="drawer-header">
-            <div class="drawer-logo">DUFERI</div>
-            <button class="drawer-close" id="drawerClose">✕</button>
-        </div>
-        <ul class="drawer-menu">
-            <li><a href="brand-story.html">DUFERI STORY <span class="plus">+</span></a></li>
-            <li><a href="new-best.html">NEW & BEST <span class="plus">+</span></a></li>
-            <li><a href="skincare.html">SKINCARE <span class="plus">+</span></a></li>
-            <li><a href="makeup.html">MAKEUP <span class="plus">+</span></a></li>
-            <li><a href="homme.html">HOMME <span class="plus">+</span></a></li>
-        </ul>
-    </div>
-
-    <!-- 토스트 팝업 -->
-    <div id="toastPopup" class="toast-popup">알림 메시지</div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var toggleBtn = document.querySelector('.mobile-menu-toggle');
-            var closeBtn = document.getElementById('drawerClose');
-            var drawer = document.getElementById('mobileDrawer');
-            var overlay = document.getElementById('mobileOverlay');
-
-            function openDrawer() {
-                if(drawer && overlay) {
-                    drawer.classList.add('open');
-                    overlay.classList.add('open');
-                    document.body.style.overflow = 'hidden';
-                }
-            }
-
-            function closeDrawer() {
-                if(drawer && overlay) {
-                    drawer.classList.remove('open');
-                    overlay.classList.remove('open');
-                    document.body.style.overflow = '';
-                }
-            }
-
-            if(toggleBtn) toggleBtn.addEventListener('click', openDrawer);
-            if(closeBtn) closeBtn.addEventListener('click', closeDrawer);
-            if(overlay) overlay.addEventListener('click', closeDrawer);
-
-            // 장바구니 배지 동기화
-            var cartBadge = document.getElementById('cartBadge');
-            var savedCount = localStorage.getItem('cartCount');
-            if (savedCount && parseInt(savedCount, 10) > 0 && cartBadge) { cartBadge.textContent = savedCount; cartBadge.classList.add('active'); }
-
-            // 전역 토스트 팝업 함수
-            var toastTimeout;
-            window.showToast = function(message) {
-                var toast = document.getElementById('toastPopup');
-                if (toast) {
-                    if (message) toast.textContent = message;
-                    toast.classList.add('show');
-                    clearTimeout(toastTimeout);
-                    toastTimeout = setTimeout(function() { toast.classList.remove('show'); }, 3000);
-                }
-            };
-        });
-    </script>
+    <!-- 공통 스크립트 -->
+    <script src="common.js"></script>
 </body>
 </html>

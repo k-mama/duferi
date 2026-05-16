@@ -10,7 +10,7 @@
         body { font-family: 'Helvetica Neue', Arial, sans-serif; color: #333; line-height: 1.6; }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
-        .header { display: flex; justify-content: space-between; align-items: center; padding: 0 40px; height: 80px; border-bottom: 1px solid #eee; background-color: #fff; position: sticky; top: 0; z-index: 100; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 0 40px; height: 80px; border-bottom: 1px solid #eee; background-color: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; }
         .logo { font-size: 28px; font-weight: bold; letter-spacing: 2px; }
         .main-menu { display: flex; gap: 40px; }
         .main-menu li a { font-size: 15px; font-weight: 500; transition: color 0.3s ease; }
@@ -22,6 +22,10 @@
         /* 토스트 팝업 스타일 */
         .toast-popup { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(40px); background-color: rgba(17, 17, 17, 0.9); color: #fff; padding: 15px 30px; border-radius: 5px; font-size: 15px; font-weight: 500; z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
         .toast-popup.show { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+
+        /* 스크롤 등장 애니메이션 */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
         .mobile-menu-toggle { display: none; background: none; border: none; font-size: 28px; cursor: pointer; color: #333; min-height: 44px; padding: 0 10px; }
         .mobile-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.5); z-index: 999; opacity: 0; transition: opacity 0.3s ease; }
@@ -43,29 +47,10 @@
     </style>
 </head>
 <body>
-    <!-- 헤더 영역 -->
-    <header class="header">
-        <div class="logo"><a href="index.html">DUFERI</a></div>
-        <button class="mobile-menu-toggle">☰</button>
-        <nav>
-            <ul class="main-menu">
-                <li><a href="brand-story.html">DUFERI STORY</a></li>
-                <li><a href="new-best.html">NEW & BEST</a></li>
-                <li><a href="skincare.html">SKINCARE</a></li>
-                <li><a href="makeup.html">MAKEUP</a></li>
-                <li><a href="homme.html">HOMME</a></li>
-            </ul>
-        </nav>
-        <nav>
-            <ul class="utility-menu">
-                <li><a href="login.html">로그인</a></li>
-                <li><a href="mypage.html">마이페이지</a></li>
-                <li><a href="cart.html">장바구니<span id="cartBadge" class="cart-badge">0</span></a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- 공통 헤더 삽입 영역 -->
+    <div id="header-container"></div>
 
-    <main style="text-align: center; padding: 100px 20px;">
+    <main class="reveal" style="text-align: center; padding: 100px 20px;">
         <h1>MAKEUP</h1>
         <p>페이지 준비 중입니다.</p>
         <a href="index.html" style="color: #333; text-decoration: underline;">메인으로 돌아가기</a>
@@ -80,6 +65,9 @@
             <li><a href="skincare.html">SKINCARE <span class="plus">+</span></a></li>
             <li><a href="makeup.html">MAKEUP <span class="plus">+</span></a></li>
             <li><a href="homme.html">HOMME <span class="plus">+</span></a></li>
+            <li style="border-top: 1px solid #ddd; margin-top: 10px;"><a href="login.html" style="color: #666; font-size: 14px;">로그인</a></li>
+            <li><a href="mypage.html" style="color: #666; font-size: 14px;">마이페이지</a></li>
+            <li><a href="cart.html" style="color: #666; font-size: 14px;">장바구니 <span class="cart-badge">0</span></a></li>
         </ul>
     </div>
 
@@ -93,8 +81,10 @@
             function closeDrawer() { if(drawer && overlay) { drawer.classList.remove('open'); overlay.classList.remove('open'); document.body.style.overflow = ''; } }
             if(toggleBtn) toggleBtn.addEventListener('click', openDrawer); if(closeBtn) closeBtn.addEventListener('click', closeDrawer); if(overlay) overlay.addEventListener('click', closeDrawer);
             
-            var cartBadge = document.getElementById('cartBadge'), savedCount = localStorage.getItem('cartCount');
-            if (savedCount && parseInt(savedCount, 10) > 0 && cartBadge) { cartBadge.textContent = savedCount; cartBadge.classList.add('active'); }
+            var savedCount = localStorage.getItem('cartCount');
+            if (savedCount && parseInt(savedCount, 10) > 0) { 
+                document.querySelectorAll('.cart-badge').forEach(function(badge) { badge.textContent = savedCount; badge.classList.add('active'); });
+            }
 
             // 전역 토스트 팝업 함수
             var toastTimeout;
@@ -107,6 +97,17 @@
                     toastTimeout = setTimeout(function() { toast.classList.remove('show'); }, 3000);
                 }
             };
+
+            // 스크롤 등장 애니메이션 (Intersection Observer)
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
         });
     </script>
 </body>
