@@ -139,19 +139,65 @@
             position: absolute;
             left: 0;
         }
+
+        /* --- 모바일 오프캔버스 메뉴 및 반응형 CSS --- */
+        .mobile-menu-toggle { display: none; background: none; border: none; font-size: 28px; cursor: pointer; color: #333; min-height: 44px; padding: 0 10px; }
+        .mobile-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.5); z-index: 999; opacity: 0; transition: opacity 0.3s ease; }
+        .mobile-overlay.open { display: block; opacity: 1; }
+        .mobile-drawer { position: fixed; top: 0; right: -100%; width: 75%; height: 100vh; background: #fff; z-index: 1000; transition: right 0.3s ease; display: flex; flex-direction: column; box-shadow: -5px 0 15px rgba(0,0,0,0.1); }
+        .mobile-drawer.open { right: 0; }
+        .drawer-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #eee; }
+        .drawer-logo { font-size: 20px; font-weight: bold; letter-spacing: 2px; }
+        .drawer-close { background: none; border: none; font-size: 24px; cursor: pointer; color: #333; padding: 5px; }
+        .drawer-menu { display: flex; flex-direction: column; margin: 0; padding: 0; overflow-y: auto; }
+        .drawer-menu li a { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #f5f5f5; font-size: 16px; font-weight: 500; }
+        .drawer-menu li a .plus { font-size: 22px; font-weight: 300; color: #999; }
+        img { max-width: 100%; height: auto; }
+
+        @media (max-width: 768px) {
+            .header nav { display: none; }
+            .header { padding: 0 20px; }
+            .mobile-menu-toggle { display: block; }
+            .gift-hero {
+                padding: 50px 20px;
+            }
+            .gift-hero h2 {
+                font-size: clamp(24px, 7vw, 32px);
+            }
+            .service-details {
+                margin: 40px auto;
+                padding: 0 20px;
+            }
+            .service-item, .service-item:nth-child(even) {
+                flex-direction: column;
+                gap: 30px;
+                margin-bottom: 50px;
+            }
+            .image-placeholder {
+                height: 250px;
+                width: 100%;
+            }
+            .text-content h3 {
+                font-size: 20px;
+            }
+            .notice-area {
+                padding: 20px;
+                margin-bottom: 40px;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- 헤더 영역 -->
     <header class="header">
         <div class="logo"><a href="#">DUFERI</a></div>
+        <button class="mobile-menu-toggle">☰</button>
         <nav>
             <ul class="main-menu">
                 <li><a href="#">NEW & BEST</a></li>
                 <li><a href="#">SKINCARE</a></li>
                 <li><a href="#">MAKEUP</a></li>
-                <li><a href="#">FRAGRANCE</a></li>
-                <li><a href="#">MEN</a></li>
+                <li><a href="#">HOMME</a></li>
                 <li><a href="#">BRAND STORY</a></li>
             </ul>
         </nav>
@@ -199,5 +245,52 @@
             </ul>
         </section>
     </main>
+
+    <!-- 모바일 메뉴 오버레이 -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- 모바일 사이드 드로어 -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-header">
+            <div class="drawer-logo">DUFERI</div>
+            <button class="drawer-close" id="drawerClose">✕</button>
+        </div>
+        <ul class="drawer-menu">
+            <li><a href="#">NEW & BEST <span class="plus">+</span></a></li>
+            <li><a href="#">SKINCARE <span class="plus">+</span></a></li>
+            <li><a href="#">MAKEUP <span class="plus">+</span></a></li>
+            <li><a href="#">HOMME <span class="plus">+</span></a></li>
+            <li><a href="#">BRAND STORY <span class="plus">+</span></a></li>
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var toggleBtn = document.querySelector('.mobile-menu-toggle');
+            var closeBtn = document.getElementById('drawerClose');
+            var drawer = document.getElementById('mobileDrawer');
+            var overlay = document.getElementById('mobileOverlay');
+
+            function openDrawer() {
+                if(drawer && overlay) {
+                    drawer.classList.add('open');
+                    overlay.classList.add('open');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            function closeDrawer() {
+                if(drawer && overlay) {
+                    drawer.classList.remove('open');
+                    overlay.classList.remove('open');
+                    document.body.style.overflow = '';
+                }
+            }
+
+            if(toggleBtn) toggleBtn.addEventListener('click', openDrawer);
+            if(closeBtn) closeBtn.addEventListener('click', closeDrawer);
+            if(overlay) overlay.addEventListener('click', closeDrawer);
+        });
+    </script>
 </body>
 </html>
