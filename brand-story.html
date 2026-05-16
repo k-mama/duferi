@@ -60,6 +60,14 @@
             font-size: 13px;
         }
 
+        /* 장바구니 배지 스타일 */
+        .cart-badge { background-color: #d4af37; color: #fff; font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 10px; margin-left: 5px; display: none; }
+        .cart-badge.active { display: inline-block; }
+
+        /* 토스트 팝업 스타일 */
+        .toast-popup { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(40px); background-color: rgba(17, 17, 17, 0.9); color: #fff; padding: 15px 30px; border-radius: 5px; font-size: 15px; font-weight: 500; z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .toast-popup.show { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+
         /* 브랜드 스토리 특화 스타일 */
         /* 1. 메인 비주얼 (Hero) */
         .story-hero {
@@ -169,22 +177,22 @@
 <body>
     <!-- 헤더 영역 -->
     <header class="header">
-        <div class="logo"><a href="#">DUFERI</a></div>
+        <div class="logo"><a href="index.html">DUFERI</a></div>
         <button class="mobile-menu-toggle">☰</button>
         <nav>
             <ul class="main-menu">
-                <li><a href="#">NEW & BEST</a></li>
-                <li><a href="#">SKINCARE</a></li>
-                <li><a href="#">MAKEUP</a></li>
-                <li><a href="#">HOMME</a></li>
-                <li><a href="#">BRAND STORY</a></li>
+                <li><a href="brand-story.html">DUFERI STORY</a></li>
+                <li><a href="new-best.html">NEW & BEST</a></li>
+                <li><a href="skincare.html">SKINCARE</a></li>
+                <li><a href="makeup.html">MAKEUP</a></li>
+                <li><a href="homme.html">HOMME</a></li>
             </ul>
         </nav>
         <nav>
             <ul class="utility-menu">
-                <li><a href="#">로그인</a></li>
-                <li><a href="#">마이페이지</a></li>
-                <li><a href="#">장바구니</a></li>
+                <li><a href="login.html">로그인</a></li>
+                <li><a href="mypage.html">마이페이지</a></li>
+                <li><a href="cart.html">장바구니<span id="cartBadge" class="cart-badge">0</span></a></li>
             </ul>
         </nav>
     </header>
@@ -223,13 +231,16 @@
             <button class="drawer-close" id="drawerClose">✕</button>
         </div>
         <ul class="drawer-menu">
-            <li><a href="#">NEW & BEST <span class="plus">+</span></a></li>
-            <li><a href="#">SKINCARE <span class="plus">+</span></a></li>
-            <li><a href="#">MAKEUP <span class="plus">+</span></a></li>
-            <li><a href="#">HOMME <span class="plus">+</span></a></li>
-            <li><a href="#">BRAND STORY <span class="plus">+</span></a></li>
+            <li><a href="brand-story.html">DUFERI STORY <span class="plus">+</span></a></li>
+            <li><a href="new-best.html">NEW & BEST <span class="plus">+</span></a></li>
+            <li><a href="skincare.html">SKINCARE <span class="plus">+</span></a></li>
+            <li><a href="makeup.html">MAKEUP <span class="plus">+</span></a></li>
+            <li><a href="homme.html">HOMME <span class="plus">+</span></a></li>
         </ul>
     </div>
+
+    <!-- 토스트 팝업 -->
+    <div id="toastPopup" class="toast-popup">알림 메시지</div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -257,6 +268,22 @@
             if(toggleBtn) toggleBtn.addEventListener('click', openDrawer);
             if(closeBtn) closeBtn.addEventListener('click', closeDrawer);
             if(overlay) overlay.addEventListener('click', closeDrawer);
+
+            // 장바구니 배지 동기화
+            var cartBadge = document.getElementById('cartBadge'), savedCount = localStorage.getItem('cartCount');
+            if (savedCount && parseInt(savedCount, 10) > 0 && cartBadge) { cartBadge.textContent = savedCount; cartBadge.classList.add('active'); }
+
+            // 전역 토스트 팝업 함수
+            var toastTimeout;
+            window.showToast = function(message) {
+                var toast = document.getElementById('toastPopup');
+                if (toast) {
+                    if (message) toast.textContent = message;
+                    toast.classList.add('show');
+                    clearTimeout(toastTimeout);
+                    toastTimeout = setTimeout(function() { toast.classList.remove('show'); }, 3000);
+                }
+            };
         });
     </script>
 </body>

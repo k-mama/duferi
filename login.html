@@ -3,62 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DUFERI - 선물 포장 서비스</title>
+    <title>DUFERI - 로그인</title>
     <style>
         /* 기본 초기화 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            color: #333;
-            line-height: 1.6;
-        }
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        ul {
-            list-style: none;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; color: #333; line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
 
-        /* 헤더 및 네비게이션 스타일 (index.html과 동일) */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 40px;
-            height: 80px;
-            border-bottom: 1px solid #eee;
-            background-color: #fff;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            letter-spacing: 2px;
-        }
-        .main-menu {
-            display: flex;
-            gap: 40px;
-        }
-        .main-menu li a {
-            font-size: 15px;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-        .main-menu li a:hover {
-            color: #d4af37;
-        }
-        .utility-menu {
-            display: flex;
-            gap: 20px;
-            font-size: 13px;
-        }
+        /* 헤더 및 네비게이션 스타일 (공통) */
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 0 40px; height: 80px; border-bottom: 1px solid #eee; background-color: #fff; position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 28px; font-weight: bold; letter-spacing: 2px; }
+        .main-menu { display: flex; gap: 40px; }
+        .main-menu li a { font-size: 15px; font-weight: 500; transition: color 0.3s ease; }
+        .main-menu li a:hover { color: #d4af37; }
+        .utility-menu { display: flex; gap: 20px; font-size: 13px; }
 
         /* 장바구니 배지 스타일 */
         .cart-badge { background-color: #d4af37; color: #fff; font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 10px; margin-left: 5px; display: none; }
@@ -67,86 +26,6 @@
         /* 토스트 팝업 스타일 */
         .toast-popup { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(40px); background-color: rgba(17, 17, 17, 0.9); color: #fff; padding: 15px 30px; border-radius: 5px; font-size: 15px; font-weight: 500; z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
         .toast-popup.show { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
-
-        /* 기프트 포장 서비스 특화 스타일 */
-        .gift-hero {
-            text-align: center;
-            padding: 80px 20px;
-            background-color: #fcfcfc;
-            border-bottom: 1px solid #eaeaea;
-        }
-        .gift-hero h2 {
-            font-size: 32px;
-            font-weight: 300;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-        }
-        .gift-hero p {
-            font-size: 16px;
-            color: #666;
-        }
-
-        .service-details {
-            max-width: 1000px;
-            margin: 60px auto;
-            padding: 0 20px;
-        }
-        .service-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 80px;
-            gap: 50px;
-        }
-        .service-item:nth-child(even) {
-            flex-direction: row-reverse;
-        }
-        .image-placeholder {
-            flex: 1;
-            height: 400px;
-            background-color: #eee;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #999;
-            font-size: 14px;
-        }
-        .text-content {
-            flex: 1;
-        }
-        .text-content h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: #111;
-            font-weight: 500;
-        }
-        .text-content p {
-            font-size: 15px;
-            color: #555;
-        }
-
-        .notice-area {
-            max-width: 1000px;
-            margin: 0 auto 80px;
-            padding: 30px;
-            background-color: #f9f9f9;
-        }
-        .notice-area h4 {
-            font-size: 16px;
-            margin-bottom: 15px;
-            color: #333;
-        }
-        .notice-area ul li {
-            font-size: 13px;
-            color: #777;
-            margin-bottom: 8px;
-            position: relative;
-            padding-left: 10px;
-        }
-        .notice-area ul li::before {
-            content: '-';
-            position: absolute;
-            left: 0;
-        }
 
         /* --- 모바일 오프캔버스 메뉴 및 반응형 CSS --- */
         .mobile-menu-toggle { display: none; background: none; border: none; font-size: 28px; cursor: pointer; color: #333; min-height: 44px; padding: 0 10px; }
@@ -166,32 +45,6 @@
             .header nav { display: none; }
             .header { padding: 0 20px; }
             .mobile-menu-toggle { display: block; }
-            .gift-hero {
-                padding: 50px 20px;
-            }
-            .gift-hero h2 {
-                font-size: clamp(24px, 7vw, 32px);
-            }
-            .service-details {
-                margin: 40px auto;
-                padding: 0 20px;
-            }
-            .service-item, .service-item:nth-child(even) {
-                flex-direction: column;
-                gap: 30px;
-                margin-bottom: 50px;
-            }
-            .image-placeholder {
-                height: 250px;
-                width: 100%;
-            }
-            .text-content h3 {
-                font-size: 20px;
-            }
-            .notice-area {
-                padding: 20px;
-                margin-bottom: 40px;
-            }
         }
     </style>
 </head>
@@ -218,40 +71,23 @@
         </nav>
     </header>
 
-    <main>
-        <!-- 기프트 서비스 히어로 섹션 -->
-        <section class="gift-hero">
-            <h2>GIFT PACKING SERVICE</h2>
-            <p>소중한 사람을 위한 특별한 선물, DUFERI가 정성을 다해 포장해 드립니다.</p>
-        </section>
-
-        <!-- 제공 서비스 내역 상세 (지그재그 레이아웃) -->
-        <section class="service-details">
-            <div class="service-item">
-                <div class="image-placeholder">이미지: 시그니처 박스 및 리본</div>
-                <div class="text-content">
-                    <h3>01. Signature Box & Ribbon</h3>
-                    <p>DUFERI만의 모던하고 우아한 블랙 앤 골드 시그니처 박스에 제품을 안전하게 담아드립니다. 고급스러운 골드 리본으로 마무리하여 선물의 품격을 한층 더 높여줍니다.</p>
-                </div>
+    <main style="max-width: 400px; margin: 100px auto; text-align: center; padding: 0 20px;">
+        <h1 style="margin-bottom: 30px; font-weight: 300; letter-spacing: 2px;">LOGIN</h1>
+        <form id="loginForm" action="index.html" style="display: flex; flex-direction: column; gap: 15px;">
+            <input type="text" id="userId" placeholder="아이디를 입력해주세요" style="padding: 15px; border: 1px solid #ccc; font-size: 14px; outline: none;">
+            <div style="position: relative; display: flex;">
+                <input type="password" id="userPw" placeholder="비밀번호를 입력해주세요" style="padding: 15px; padding-right: 45px; border: 1px solid #ccc; font-size: 14px; outline: none; width: 100%;">
+                <button type="button" id="togglePwBtn" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 16px; color: #666;">👁️</button>
             </div>
-            <div class="service-item">
-                <div class="image-placeholder">이미지: 메시지 카드와 쇼핑백</div>
-                <div class="text-content">
-                    <h3>02. Message Card & Shopping Bag</h3>
-                    <p>전달하고 싶은 따뜻한 마음을 담을 수 있는 전용 메시지 카드와, 선물을 직접 건넬 때 유용한 프리미엄 쇼핑백을 함께 동봉해 드립니다.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 유의사항 안내 -->
-        <section class="notice-area">
-            <h4>유의사항</h4>
-            <ul>
-                <li>선물 포장 서비스는 주문/결제 단계에서 옵션으로 선택하실 수 있습니다.</li>
-                <li>일부 부피가 큰 기획세트나 대용량 제품의 경우, 규격에 맞는 박스가 없어 쇼핑백만 제공될 수 있습니다.</li>
-                <li>포장재(박스, 리본, 쇼핑백 등)의 디자인은 시즌이나 브랜드 정책에 따라 예고 없이 변경될 수 있습니다.</li>
-            </ul>
-        </section>
+            <button type="submit" style="padding: 16px; background: #111; color: #fff; border: none; cursor: pointer; font-size: 15px; font-weight: bold; margin-top: 10px;">로그인</button>
+        </form>
+        <div style="margin-top: 20px; font-size: 13px;">
+            <a href="#" style="color: #666; text-decoration: none; margin-right: 10px;">회원가입</a> | 
+            <a href="#" style="color: #666; text-decoration: none; margin-left: 10px;">아이디/비밀번호 찾기</a>
+        </div>
+        <div style="margin-top: 50px;">
+            <a href="index.html" style="color: #111; text-decoration: underline; font-size: 14px;">메인으로 돌아가기</a>
+        </div>
     </main>
 
     <!-- 모바일 메뉴 오버레이 -->
@@ -301,6 +137,30 @@
             if(toggleBtn) toggleBtn.addEventListener('click', openDrawer);
             if(closeBtn) closeBtn.addEventListener('click', closeDrawer);
             if(overlay) overlay.addEventListener('click', closeDrawer);
+
+            // 로그인 폼 검증
+            var loginForm = document.getElementById('loginForm');
+            if(loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    var id = document.getElementById('userId').value.trim();
+                    var pw = document.getElementById('userPw').value.trim();
+                    if (!id || !pw) {
+                        e.preventDefault();
+                        alert('정보를 입력해주세요');
+                    }
+                });
+            }
+
+            // 비밀번호 표시/숨기기 토글 기능
+            var togglePwBtn = document.getElementById('togglePwBtn');
+            var userPwInput = document.getElementById('userPw');
+            if(togglePwBtn && userPwInput) {
+                togglePwBtn.addEventListener('click', function() {
+                    var type = userPwInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    userPwInput.setAttribute('type', type);
+                    this.textContent = type === 'password' ? '👁️' : '🙈';
+                });
+            }
 
             // 장바구니 배지 동기화
             var cartBadge = document.getElementById('cartBadge'), savedCount = localStorage.getItem('cartCount');

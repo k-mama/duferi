@@ -64,6 +64,45 @@
             font-size: 13px;
         }
 
+    /* 장바구니 배지 스타일 */
+    .cart-badge {
+        background-color: #d4af37;
+        color: #fff;
+        font-size: 11px;
+        font-weight: bold;
+        padding: 2px 6px;
+        border-radius: 10px;
+        margin-left: 5px;
+        display: none;
+    }
+    .cart-badge.active { display: inline-block; }
+
+    /* 토스트 팝업 스타일 */
+    .toast-popup { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(40px); background-color: rgba(17, 17, 17, 0.9); color: #fff; padding: 15px 30px; border-radius: 5px; font-size: 15px; font-weight: 500; z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+    .toast-popup.show { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+
+    /* --- 모바일 오프캔버스 메뉴 및 반응형 CSS --- */
+    .mobile-menu-toggle { display: none; background: none; border: none; font-size: 28px; cursor: pointer; color: #333; min-height: 44px; padding: 0 10px; }
+    .mobile-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.5); z-index: 999; opacity: 0; transition: opacity 0.3s ease; }
+    .mobile-overlay.open { display: block; opacity: 1; }
+    .mobile-drawer { position: fixed; top: 0; right: -100%; width: 75%; height: 100vh; background: #fff; z-index: 1000; transition: right 0.3s ease; display: flex; flex-direction: column; box-shadow: -5px 0 15px rgba(0,0,0,0.1); }
+    .mobile-drawer.open { right: 0; }
+    .drawer-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #eee; }
+    .drawer-logo { font-size: 20px; font-weight: bold; letter-spacing: 2px; }
+    .drawer-close { background: none; border: none; font-size: 24px; cursor: pointer; color: #333; padding: 5px; }
+    .drawer-menu { display: flex; flex-direction: column; margin: 0; padding: 0; overflow-y: auto; }
+    .drawer-menu li a { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #f5f5f5; font-size: 16px; font-weight: 500; }
+    .drawer-menu li a .plus { font-size: 22px; font-weight: 300; color: #999; }
+    img { max-width: 100%; height: auto; }
+
+    @media (max-width: 768px) {
+        .header nav { display: none; }
+        .header { padding: 0 20px; }
+        .mobile-menu-toggle { display: block; }
+        .hero-section { height: 80vh; padding: 0 20px; text-align: center; }
+        .hero-section h1 { font-size: clamp(28px, 8vw, 40px); }
+    }
+
         /* 메인 콘텐츠 영역 (예시) */
         .hero-section {
             height: 600px;
@@ -85,26 +124,27 @@
     <header class="header">
         <!-- 브랜드 로고 -->
         <div class="logo">
-            <a href="#">DUFERI</a>
+            <a href="index.html">DUFERI</a>
         </div>
+        <button class="mobile-menu-toggle">☰</button>
 
         <!-- 메인 네비게이션 (헤라 사이트 구성 참고) -->
         <nav>
             <ul class="main-menu">
-                <li><a href="#">NEW & BEST</a></li>
-                <li><a href="#">SKINCARE</a></li>
-                <li><a href="#">MAKEUP</a></li>
-                <li><a href="#">HOMME</a></li>
-                <li><a href="#">BRAND STORY</a></li>
+                <li><a href="brand-story.html">DUFERI STORY</a></li>
+                <li><a href="new-best.html">NEW & BEST</a></li>
+                <li><a href="skincare.html">SKINCARE</a></li>
+                <li><a href="makeup.html">MAKEUP</a></li>
+                <li><a href="homme.html">HOMME</a></li>
             </ul>
         </nav>
 
         <!-- 유틸리티 네비게이션 -->
         <nav>
             <ul class="utility-menu">
-                <li><a href="#">로그인</a></li>
-                <li><a href="#">마이페이지</a></li>
-                <li><a href="#">장바구니</a></li>
+                <li><a href="login.html">로그인</a></li>
+                <li><a href="mypage.html">마이페이지</a></li>
+                <li><a href="cart.html">장바구니<span id="cartBadge" class="cart-badge">0</span></a></li>
             </ul>
         </nav>
     </header>
@@ -117,5 +157,71 @@
         </section>
     </main>
 
+    <!-- 모바일 메뉴 오버레이 -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- 모바일 사이드 드로어 -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-header">
+            <div class="drawer-logo">DUFERI</div>
+            <button class="drawer-close" id="drawerClose">✕</button>
+        </div>
+        <ul class="drawer-menu">
+            <li><a href="brand-story.html">DUFERI STORY <span class="plus">+</span></a></li>
+            <li><a href="new-best.html">NEW & BEST <span class="plus">+</span></a></li>
+            <li><a href="skincare.html">SKINCARE <span class="plus">+</span></a></li>
+            <li><a href="makeup.html">MAKEUP <span class="plus">+</span></a></li>
+            <li><a href="homme.html">HOMME <span class="plus">+</span></a></li>
+        </ul>
+    </div>
+
+    <!-- 토스트 팝업 -->
+    <div id="toastPopup" class="toast-popup">알림 메시지</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var toggleBtn = document.querySelector('.mobile-menu-toggle');
+            var closeBtn = document.getElementById('drawerClose');
+            var drawer = document.getElementById('mobileDrawer');
+            var overlay = document.getElementById('mobileOverlay');
+
+            function openDrawer() {
+                if(drawer && overlay) {
+                    drawer.classList.add('open');
+                    overlay.classList.add('open');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            function closeDrawer() {
+                if(drawer && overlay) {
+                    drawer.classList.remove('open');
+                    overlay.classList.remove('open');
+                    document.body.style.overflow = '';
+                }
+            }
+
+            if(toggleBtn) toggleBtn.addEventListener('click', openDrawer);
+            if(closeBtn) closeBtn.addEventListener('click', closeDrawer);
+            if(overlay) overlay.addEventListener('click', closeDrawer);
+
+            // 장바구니 배지 동기화
+            var cartBadge = document.getElementById('cartBadge');
+            var savedCount = localStorage.getItem('cartCount');
+            if (savedCount && parseInt(savedCount, 10) > 0 && cartBadge) { cartBadge.textContent = savedCount; cartBadge.classList.add('active'); }
+
+            // 전역 토스트 팝업 함수
+            var toastTimeout;
+            window.showToast = function(message) {
+                var toast = document.getElementById('toastPopup');
+                if (toast) {
+                    if (message) toast.textContent = message;
+                    toast.classList.add('show');
+                    clearTimeout(toastTimeout);
+                    toastTimeout = setTimeout(function() { toast.classList.remove('show'); }, 3000);
+                }
+            };
+        });
+    </script>
 </body>
 </html>
