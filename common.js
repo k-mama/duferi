@@ -1,4 +1,4 @@
-// 전역 토스트 팝업 함수
+채// 전역 토스트 팝업 함수
 var toastTimeout;
 window.showToast = function(message) {
     var toast = document.getElementById('toastPopup');

@@ -4,85 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DUFERI - 스킨케어</title>
+    <link rel="stylesheet" href="common.css">
     <style>
-        /* 기본 초기화 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            color: #333;
-            line-height: 1.6;
-        }
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        ul {
-            list-style: none;
-        }
-
-        /* 헤더 및 네비게이션 스타일 (공통) */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 40px;
-            height: 80px;
-            border-bottom: 1px solid #eee;
-            background-color: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            letter-spacing: 2px;
-        }
-        .main-menu {
-            display: flex;
-            gap: 40px;
-        }
-        .main-menu li a {
-            font-size: 15px;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-        .main-menu li a:hover {
-            color: #d4af37;
-        }
-        .utility-menu {
-            display: flex;
-            gap: 20px;
-            font-size: 13px;
-        }
-
-        /* 장바구니 배지 스타일 */
-        .cart-badge {
-            background-color: #d4af37;
-            color: #fff;
-            font-size: 11px;
-            font-weight: bold;
-            padding: 2px 6px;
-            border-radius: 10px;
-            margin-left: 5px;
-            display: none; /* 숫자가 0일 땐 숨김 */
-        }
-        .cart-badge.active { display: inline-block; }
-
-        /* 토스트 팝업 스타일 */
-        .toast-popup { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(40px); background-color: rgba(17, 17, 17, 0.9); color: #fff; padding: 15px 30px; border-radius: 5px; font-size: 15px; font-weight: 500; z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
-        .toast-popup.show { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
-
-        /* 스크롤 등장 애니메이션 */
-        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
         /* 제품 목록 페이지 특화 스타일 */
         .page-header {
             text-align: center;
@@ -208,23 +131,7 @@
             color: #111;
         }
 
-        /* --- 모바일 오프캔버스 메뉴 및 반응형 CSS --- */
-        .mobile-menu-toggle { display: none; background: none; border: none; font-size: 28px; cursor: pointer; color: #333; min-height: 44px; padding: 0 10px; }
-        .mobile-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.5); z-index: 999; opacity: 0; transition: opacity 0.3s ease; }
-        .mobile-overlay.open { display: block; opacity: 1; }
-        .mobile-drawer { position: fixed; top: 0; right: -100%; width: 75%; height: 100vh; background: #fff; z-index: 1000; transition: right 0.3s ease; display: flex; flex-direction: column; box-shadow: -5px 0 15px rgba(0,0,0,0.1); }
-        .mobile-drawer.open { right: 0; }
-        .drawer-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #eee; }
-        .drawer-logo { font-size: 20px; font-weight: bold; letter-spacing: 2px; }
-        .drawer-close { background: none; border: none; font-size: 24px; cursor: pointer; color: #333; padding: 5px; }
-        .drawer-menu { display: flex; flex-direction: column; margin: 0; padding: 0; overflow-y: auto; }
-        .drawer-menu li a { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #f5f5f5; font-size: 16px; font-weight: 500; }
-        .drawer-menu li a .plus { font-size: 22px; font-weight: 300; color: #999; }
-        img { max-width: 100%; height: auto; }
         @media (max-width: 768px) {
-            .header nav { display: none; }
-            .header { padding: 0 20px; }
-            .mobile-menu-toggle { display: block; }
             .category-filter li a {
                 min-height: 44px;
                 display: inline-flex;
@@ -313,93 +220,21 @@
             </div>
         </div>
     </main>
-
-    <!-- 모바일 메뉴 오버레이 -->
-    <div class="mobile-overlay" id="mobileOverlay"></div>
-
-    <!-- 모바일 사이드 드로어 -->
-    <div class="mobile-drawer" id="mobileDrawer">
-        <div class="drawer-header">
-            <div class="drawer-logo">DUFERI</div>
-            <button class="drawer-close" id="drawerClose">✕</button>
-        </div>
-        <ul class="drawer-menu">
-            <li><a href="brand-story.html">DUFERI STORY <span class="plus">+</span></a></li>
-            <li><a href="homme.html">HOMME <span class="plus">+</span></a></li>
-            <li><a href="skincare.html">SKINCARE <span class="plus">+</span></a></li>
-            <li><a href="makeup.html">MAKEUP <span class="plus">+</span></a></li>
-            <li><a href="new-best.html">NEW & BEST <span class="plus">+</span></a></li>
-            <li style="border-top: 1px solid #ddd; margin-top: 10px;"><a href="login.html" style="color: #666; font-size: 14px;">로그인</a></li>
-            <li><a href="mypage.html" style="color: #666; font-size: 14px;">마이페이지</a></li>
-            <li><a href="cart.html" style="color: #666; font-size: 14px;">장바구니 <span class="cart-badge">0</span></a></li>
-        </ul>
-    </div>
-
-    <!-- 토스트 팝업 -->
-    <div id="toastPopup" class="toast-popup">장바구니에 담겼습니다</div>
-
+    
+    <!-- 공통 스크립트 -->
+    <script src="common.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var toggleBtn = document.querySelector('.mobile-menu-toggle');
-            var closeBtn = document.getElementById('drawerClose');
-            var drawer = document.getElementById('mobileDrawer');
-            var overlay = document.getElementById('mobileOverlay');
-
-            function openDrawer() {
-                if(drawer && overlay) {
-                    drawer.classList.add('open');
-                    overlay.classList.add('open');
-                    document.body.style.overflow = 'hidden';
-                }
-            }
-
-            function closeDrawer() {
-                if(drawer && overlay) {
-                    drawer.classList.remove('open');
-                    overlay.classList.remove('open');
-                    document.body.style.overflow = '';
-                }
-            }
-
-            if(toggleBtn) toggleBtn.addEventListener('click', openDrawer);
-            if(closeBtn) closeBtn.addEventListener('click', closeDrawer);
-            if(overlay) overlay.addEventListener('click', closeDrawer);
-
             // 장바구니 담기 배지 카운트 기능
             var addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
             var cartCount = 0;
-
-            // 스킨케어 페이지에서도 localStorage를 읽어 배지를 동기화
-            var savedCount = localStorage.getItem('cartCount');
-            if (savedCount) {
-                cartCount = parseInt(savedCount, 10);
-                if (cartCount > 0) {
-                    document.querySelectorAll('.cart-badge').forEach(function(badge) {
-                        badge.textContent = cartCount; badge.classList.add('active');
-                    });
-                }
-            }
-
-            // 전역 토스트 팝업 함수
-            var toastTimeout;
-            window.showToast = function(message) {
-                var toast = document.getElementById('toastPopup');
-                if (toast) {
-                    if (message) toast.textContent = message;
-                    toast.classList.add('show');
-                    clearTimeout(toastTimeout);
-                    toastTimeout = setTimeout(function() { toast.classList.remove('show'); }, 3000);
-                }
-            };
 
             addToCartBtns.forEach(function(btn) {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation(); // 클릭 이벤트가 부모(카드)로 전파되는 것 방지
                     cartCount++;
                     localStorage.setItem('cartCount', cartCount); // 장바구니 개수 저장
-                    document.querySelectorAll('.cart-badge').forEach(function(badge) {
-                        badge.textContent = cartCount; badge.classList.add('active');
-                    });
+                    if(window.updateCartBadge) window.updateCartBadge();
                     if(window.showToast) window.showToast('장바구니에 담겼습니다');
                 });
             });
@@ -436,17 +271,6 @@
                 });
             });
 
-            // 스크롤 등장 애니메이션 (Intersection Observer)
-            var observer = new IntersectionObserver(function(entries) {
-                entries.forEach(function(entry) {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-            document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
-
             // 더보기 (Load More) 기능
             var loadMoreBtn = document.getElementById('loadMoreBtn');
             if (loadMoreBtn) {
@@ -460,16 +284,14 @@
                         newCard.className = 'product-card reveal';
                         newCard.innerHTML = dummyHTML;
                         grid.appendChild(newCard);
-                        if (typeof observer !== 'undefined') observer.observe(newCard); // 애니메이션 적용
+                        if (window.revealObserver) window.revealObserver.observe(newCard); // 애니메이션 적용
                         
                         var newCartBtn = newCard.querySelector('.add-to-cart-btn');
                         newCartBtn.addEventListener('click', function(e) {
                             e.preventDefault(); e.stopPropagation();
                             var count = parseInt(localStorage.getItem('cartCount') || '0', 10) + 1;
                             localStorage.setItem('cartCount', count);
-                            document.querySelectorAll('.cart-badge').forEach(function(b) {
-                                b.textContent = count; b.classList.add('active');
-                            });
+                            if (window.updateCartBadge) window.updateCartBadge();
                             if (window.showToast) window.showToast('장바구니에 담겼습니다');
                         });
                     }

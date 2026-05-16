@@ -27,10 +27,11 @@
         /* 헤더 및 네비게이션 스타일 (공통) */
         .header {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            padding: 0 40px;
-            height: 80px;
+            padding: 25px 40px 15px;
+            height: auto;
             border-bottom: 1px solid #eee;
             background-color: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(10px);
@@ -43,6 +44,7 @@
             font-size: 28px;
             font-weight: bold;
             letter-spacing: 2px;
+            margin-bottom: 20px;
         }
         .main-menu {
             display: flex;
@@ -57,6 +59,9 @@
             color: #d4af37;
         }
         .utility-menu {
+            position: absolute;
+            right: 40px;
+            top: 35px;
             display: flex;
             gap: 20px;
             font-size: 13px;
@@ -170,7 +175,8 @@
 
         @media (max-width: 768px) {
             .header nav { display: none; }
-            .header { padding: 0 20px; }
+            .header { flex-direction: row; justify-content: space-between; height: 80px; padding: 0 20px; }
+            .logo { margin-bottom: 0; }
             .mobile-menu-toggle { display: block; }
             .story-hero { height: 80vh; padding: 0 20px; }
             .story-hero h2 { font-size: clamp(32px, 8vw, 52px); }
