@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>듀페리 스토리 | DUFERI 공식 온라인 스토어</title>
     <style>
-        /* 럭셔리 미니멀리즘 베이스 세팅 */
+        /* 하이엔드 럭셔리 미니멀리즘 베이스 세팅 */
         * {
             margin: 0;
             padding: 0;
@@ -22,7 +22,7 @@
         }
 
         /* ==========================================================
-           [루이비통 핵심 복제] 커서 호버 시 배경 및 컬러 반전 토글 헤더 
+           [루이비통 핵심 복제] 1열 구조의 슬림 반전 토글 헤더 (메인메뉴 완전 삭제)
            ========================================================== */
         header {
             position: fixed;
@@ -30,22 +30,21 @@
             left: 0;
             width: 100%;
             z-index: 1000;
-            background-color: transparent; /* 평소에는 완벽한 투명 */
-            color: #ffffff; /* 평소에는 화이트 텍스트 */
+            background-color: transparent; /* 평소 투명 */
+            color: #ffffff; /* 평소 화이트 */
             transition: background-color 0.35s cubic-bezier(0.25, 1, 0.5, 1), 
                         color 0.35s cubic-bezier(0.25, 1, 0.5, 1),
                         border-color 0.35s ease;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* 마우스를 올렸을 때(토글 상태)의 극적인 화이트 반전 효과 */
+        /* 호버 시 0.1초 만에 화이트 명품관 배경으로 반전 */
         header:hover {
-            background-color: #ffffff; /* 화이트 배경 전환 */
-            color: #111111; /* 텍스트 및 아이콘 블랙 전환 */
+            background-color: #ffffff; 
+            color: #111111; 
             border-bottom: 1px solid #e5e5e5;
         }
 
-        /* 헤더 상단 메인 라인 (3단 와이드 레이아웃) */
         .header-main-line {
             width: 100%;
             padding: 25px 40px;
@@ -65,7 +64,7 @@
         .icon-text-btn {
             background: none;
             border: none;
-            color: inherit; /* 헤더의 inversion 컬러를 그대로 상속 */
+            color: inherit; 
             font-size: 13px;
             font-weight: 500;
             letter-spacing: 0.05em;
@@ -78,16 +77,15 @@
         }
         .icon-text-btn:hover { opacity: 1; }
 
-        /* 정교한 루이비통 무드 라인아트 SVG 아이콘 제어 */
         .header-left-zone svg, .header-right-zone svg {
             width: 18px;
             height: 18px;
             fill: none;
-            stroke: currentColor; /* 흑백 반전에 따라 자동으로 색상 변환 */
+            stroke: currentColor; 
             stroke-width: 1.5;
         }
 
-        /* 중앙 영역: 대형 아이덴티티 오리지널 로고 */
+        /* 중앙 영역: 가늘고 수려한 오리지널 로고 */
         .header-center-zone {
             text-align: center;
             display: flex;
@@ -97,15 +95,15 @@
 
         .header-center-zone a {
             font-size: 28px; 
-            font-weight: 700; 
+            font-weight: 200; /* 초슬림 타이포 */
             text-transform: uppercase;
             letter-spacing: 0.4em;
             color: inherit; 
             text-decoration: none;
-            text-indent: 0.4em; /* 중앙 정렬 편향 교정 기법 */
+            text-indent: 0.4em; 
         }
 
-        /* 우측 영역: 유틸리티 아이콘 팩 & 지구본 */
+        /* 우측 영역: 유틸리티 팩 */
         .header-right-zone {
             display: flex;
             align-items: center;
@@ -133,12 +131,12 @@
         }
         .utility-icon-link:hover { transform: scale(1.05); }
 
-        /* 장바구니 우측 상단 완벽한 미니 숫자 배지 '0' */
+        /* 쇼핑백 가방 우측 상단 배지 '0' */
         .cart-badge {
             position: absolute;
             top: -2px;
             right: -4px;
-            background-color: #111111; /* 기본 블랙 배지 */
+            background-color: #111111; 
             color: #ffffff;
             font-size: 9px;
             font-weight: 600;
@@ -148,18 +146,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: background-color 0.35s, color 0.35s;
         }
-        /* 헤더 호버 시 배지 컬러도 럭셔리하게 반전 */
         header:hover .cart-badge {
             background-color: #000000;
             color: #ffffff;
         }
 
-        /* 지구본 전용 다국어 드롭다운 인터페이스 패널 */
-        .lang-selector-container {
-            position: relative;
-        }
+        /* 지구본 다국어 드롭다운 */
+        .lang-selector-container { position: relative; }
         .lang-dropdown-menu {
             display: none;
             position: absolute;
@@ -172,10 +166,7 @@
             padding: 10px 0;
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
         }
-        header:hover .lang-dropdown-menu {
-            background-color: #ffffff;
-            border: 1px solid #e5e5e5;
-        }
+        header:hover .lang-dropdown-menu { background-color: #ffffff; border: 1px solid #e5e5e5; }
         .lang-dropdown-menu.show { display: block; }
         .lang-dropdown-menu li a {
             display: block;
@@ -187,118 +178,95 @@
             opacity: 0.6;
         }
         header:hover .lang-dropdown-menu li a { color: #111111; }
-        .lang-dropdown-menu li a:hover { opacity: 1; background-color: rgba(255,255,255,0.1); }
-        header:hover .lang-dropdown-menu li a:hover { background-color: #f5f5f5; }
-        .lang-dropdown-menu li a.current { font-weight: 600; opacity: 1; }
 
         /* ==========================================================
-           [전략 반영] 하단 서브 메뉴 바 (첫 출시 집중 무드 튜닝)
-           ========================================================== */
-        .header-sub-menu-line {
-            width: 100%;
-            padding-bottom: 18px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .header-sub-menu-line ul {
-            display: flex;
-            list-style: none;
-            gap: 50px;
-        }
-
-        .header-sub-menu-line ul li a {
-            font-size: 13px;
-            font-weight: 500;
-            letter-spacing: 0.08em;
-            color: inherit;
-            text-decoration: none;
-            position: relative;
-            transition: opacity 0.3s;
-        }
-
-        /* 활성화 및 핵심 마케팅 메뉴 영역 (도드라지게 연출) */
-        .sub-nav-active {
-            opacity: 1 !important;
-        }
-        .sub-nav-active::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 1.5px;
-            background-color: currentColor;
-        }
-
-        /* 미출시 라인업 크러싱 다운 (도드라지지 않게 은은한 처리) */
-        .sub-nav-muted {
-            opacity: 0.3; /* 은은하게 죽여서 시선이 옴므와 스토리에만 고정되도록 유도 */
-            cursor: default;
-            pointer-events: none; /* 클릭 비활성화 */
-        }
-
-        /* ==========================================================
-           [비주얼 락업] 루이비통 하이엔드 오리지널 리조트 히어로 섹션
+           [루이비통 완벽 복제] 가로 폭 100% 시네마틱 풀 비디오 히어로 섹션
            ========================================================== */
         .story-hero-section {
             position: relative;
             width: 100%;
             height: 100vh;
-            /* 요청하신 대문 이미지 매핑 완료 */
-            background-image: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0) 40%), url('../images/PUSH1_W_LV_RESORT_US_DI3.avif');
-            background-size: cover;
-            background-position: center;
+            overflow: hidden;
+            background-color: #000000;
             display: flex;
             justify-content: center;
-            align-items: flex-end; /* 하단 텍스트 배치를 위해 하단 정렬 */
+            align-items: flex-end; 
             text-align: center;
-            padding-bottom: 90px; /* 루이비통 특유의 하단 여백 설정 */
+            padding-bottom: 90px; 
             color: #ffffff;
         }
 
+        /* 화면 가로폭 길이에 자동 리스폰시브 매칭되는 비디오 스트림 */
+        .cinematic-stream {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        /* 자막 및 메뉴 가독성을 위한 상하단 미세 그라데이션 필터 */
+        .hero-video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.4) 100%);
+            z-index: 2;
+        }
+
+        /* [요청 반영] 비디오 내부 하단 정렬 텍스트 & 메뉴 그룹 */
         .hero-title-group {
+            position: relative;
+            z-index: 3;
             max-width: 800px;
             margin: 0 auto;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            text-shadow: 0 2px 14px rgba(0,0,0,0.3);
         }
 
+        /* 여성 ➡️ 옴므 교정 완료 */
         .hero-subtitle {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 400;
-            letter-spacing: 0.1em;
-            margin-bottom: 10px;
+            letter-spacing: 0.15em;
+            margin-bottom: 12px;
             text-transform: uppercase;
         }
 
+        /* SS26 리조트 ➡️ SS26 기프트 컬렉션 교정 완료 */
         .hero-title {
-            font-size: 40px; 
+            font-size: 42px; 
             font-weight: 700; 
-            letter-spacing: 0.1em;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
             line-height: 1.2;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
-        /* [요청 반영] 루이비통 컬렉션 내부 수평 이동 동선 바 링크 (듀페리 5대 메뉴로 치환) */
+        /* [요청 반영] 기존 '컬렉션 보기' 자리에 배치된 듀페리 5대 카테고리 링크 바 */
         .hero-action-links {
             display: flex;
             justify-content: center;
-            gap: 25px;
+            gap: 30px;
         }
 
         .hero-action-links a {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 500;
             color: #ffffff;
             text-decoration: none;
-            border-bottom: 1px solid #ffffff; /* 우아한 화이트 하단 선 */
-            padding-bottom: 3px;
+            border-bottom: 1px solid #ffffff; /* 우아한 화이트 하단 선 복제 */
+            padding-bottom: 4px;
+            letter-spacing: 0.05em;
             transition: opacity 0.2s;
         }
-        .hero-action-links a:hover { opacity: 0.8; }
+        .hero-action-links a:hover { opacity: 0.7; }
 
-        /* 2번 섹션: 화이트 비리프 */
+        /* 2번 섹션: 화이트 비리프 서사 단락 */
         .story-belief-section {
             background-color: #ffffff; 
             color: #111111;
@@ -306,81 +274,24 @@
             text-align: center;
         }
 
-        .belief-content {
-            max-width: 700px;
-            margin: 0 auto;
-        }
+        .belief-content { max-width: 700px; margin: 0 auto; }
+        .belief-logo-wrapper { width: 160px; margin: 0 auto 40px; }
+        .belief-logo-wrapper img { width: 100%; height: auto; display: block; }
+        .belief-title { font-size: 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.4em; margin-bottom: 40px; }
+        .belief-description { font-size: 14px; color: #333333; letter-spacing: -0.01em; line-height: 2.0; word-break: keep-all; }
 
-        .belief-logo-wrapper {
-            width: 160px; 
-            margin: 0 auto 40px;
-        }
-        .belief-logo-wrapper img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .belief-title {
-            font-size: 20px; 
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.4em; 
-            margin-bottom: 40px;
-            color: #111111;
-        }
-
-        .belief-description {
-            font-size: 14px; 
-            font-weight: 400;
-            color: #333333; 
-            letter-spacing: -0.01em;
-            line-height: 2.0;
-            word-break: keep-all;
-        }
-
-        /* 대형 와이드 블랙 푸터 섹션 */
+        /* 3번 섹션: 대형 와이드 블랙 푸터 */
         footer {
             background-color: #000000;
             color: #ffffff;
             padding: 100px 40px 60px;
         }
 
-        .footer-container {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .footer-statement-area {
-            text-align: center;
-            padding-bottom: 80px;
-            border-bottom: 1px solid #1a1a1a;
-            margin-bottom: 60px;
-        }
-
-        .footer-tagline {
-            font-size: 32px;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-        }
-
-        .footer-subtitle {
-            font-size: 13px;
-            font-weight: 300;
-            color: #aaaaaa;
-            letter-spacing: 0.05em;
-            margin-bottom: 40px;
-        }
-
-        .footer-mini-logo {
-            font-size: 12px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.4em;
-            color: #ffffff;
-        }
+        .footer-container { max-width: 1100px; margin: 0 auto; }
+        .footer-statement-area { text-align: center; padding-bottom: 80px; border-bottom: 1px solid #1a1a1a; margin-bottom: 60px; }
+        .footer-tagline { font-size: 32px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 15px; }
+        .footer-subtitle { font-size: 13px; font-weight: 300; color: #aaaaaa; letter-spacing: 0.05em; margin-bottom: 40px; }
+        .footer-mini-logo { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.4em; color: #ffffff; }
 
         .footer-grid {
             display: grid;
@@ -391,143 +302,33 @@
             border-bottom: 1px solid #1a1a1a;
         }
 
-        .footer-column h3 {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 25px;
-            letter-spacing: 0.05em;
-        }
-
-        .footer-column ul {
-            list-style: none;
-        }
-
-        .footer-column ul li {
-            margin-bottom: 15px;
-        }
-
-        .footer-column ul li a {
-            font-size: 13px;
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: 400;
-            opacity: 0.8;
-            transition: opacity 0.2s;
-        }
-
+        .footer-column h3 { font-size: 14px; font-weight: 600; margin-bottom: 25px; letter-spacing: 0.05em; }
+        .footer-column ul { list-style: none; }
+        .footer-column ul li { margin-bottom: 15px; }
+        .footer-column ul li a { font-size: 13px; color: #ffffff; text-decoration: none; opacity: 0.8; }
         .footer-column ul li a:hover { opacity: 1; }
 
-        .social-links {
-            display: flex;
-            background-color: #222222;
-            width: fit-content;
-            border: 1px solid #111111;
-        }
-
-        .social-icon {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 45px;
-            height: 45px;
-            background-color: #000000;
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 11px;
-            font-weight: 400;
-            letter-spacing: 0.05em;
-            transition: background-color 0.3s;
-            border-right: 1px solid #111111;
-        }
+        .social-links { display: flex; background-color: #222222; width: fit-content; border: 1px solid #111111; }
+        .social-icon { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; background-color: #000000; color: #ffffff; text-decoration: none; font-size: 11px; border-right: 1px solid #111111; }
         .social-icon:last-child { border-right: none; }
-        .social-icon:hover { background-color: #161616; }
 
-        .country-selector {
-            position: relative;
-            max-width: 320px;
-            width: 100%;
-        }
+        .country-selector select { width: 100%; padding: 15px 20px; background-color: #000000; color: #ffffff; border: 1px solid #333333; font-size: 13px; }
 
-        .country-selector select {
-            width: 100%;
-            padding: 15px 20px;
-            background-color: #000000;
-            color: #ffffff;
-            border: 1px solid #333333;
-            font-size: 13px;
-            letter-spacing: 0.05em;
-            cursor: pointer;
-            appearance: none;
-            -webkit-appearance: none;
-        }
+        .footer-bottom { padding-top: 40px; font-size: 12px; color: #aaaaaa; line-height: 2; }
+        .legal-links a { color: #aaaaaa; text-decoration: none; margin-right: 15px; }
+        .legal-links a.highlight { color: #ffffff; font-weight: 600; }
+        .customer-service { margin-bottom: 30px; color: #888888; }
+        .customer-service span { color: #ffffff; font-weight: 500; }
+        .copyright { font-size: 11px; color: #666666; text-transform: uppercase; letter-spacing: 0.05em; }
 
-        .country-selector::after {
-            content: '↓'; 
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 11px;
-            color: #ffffff;
-            pointer-events: none;
-        }
-
-        .footer-bottom {
-            padding-top: 40px;
-            font-size: 12px;
-            color: #aaaaaa;
-            line-height: 2;
-        }
-
-        .legal-links {
-            margin-bottom: 15px;
-        }
-
-        .legal-links a {
-            color: #aaaaaa;
-            text-decoration: none;
-            margin-right: 15px;
-        }
-
-        .legal-links a.highlight {
-            color: #ffffff; 
-            font-weight: 600;
-        }
-
-        .customer-service {
-            margin-bottom: 30px;
-            color: #888888;
-        }
-
-        .customer-service span {
-            color: #ffffff;
-            font-weight: 500;
-        }
-
-        .copyright {
-            font-size: 11px;
-            color: #666666;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        /* 반응형 모바일 커스텀 스케일 */
-        @media (max-width: 992px) {
-            .client-service-text { display: none; }
-            .header-sub-menu-line ul { gap: 25px; }
-        }
-
+        @media (max-width: 992px) { .client-service-text { display: none; } }
         @media (max-width: 768px) {
             .header-main-line { padding: 20px; }
             .header-center-zone a { font-size: 22px; }
             .icon-text-btn span { display: none; }
-            .header-sub-menu-line { display: none; } /* 모바일은 햄버거 메뉴로 대체 생략 */
             .hero-title { font-size: 26px; }
+            .hero-action-links { flex-wrap: wrap; gap: 15px; }
             .footer-grid { grid-template-columns: 1fr; }
-            
-            /* [요청 반영 반용형] 모바일에서 5개 메뉴가 너무 좁아지면 줄바꿈 처리 */
-            .hero-action-links { flex-wrap: wrap; gap: 15px; justify-content: center; }
-            .hero-action-links a { font-size: 12px; }
         }
     </style>
 </head>
@@ -537,18 +338,11 @@
         <div class="header-main-line">
             <div class="header-left-zone">
                 <button class="icon-text-btn" aria-label="메뉴 열기">
-                    <svg viewBox="0 0 24 24">
-                        <line x1="3" y1="12" x2="21" y2="12"></line>
-                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                        <line x1="3" y1="18" x2="21" y2="18"></line>
-                    </svg>
+                    <svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
                     <span>메뉴</span>
                 </button>
                 <button class="icon-text-btn" aria-label="검색창 열기">
-                    <svg viewBox="0 0 24 24">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
+                    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                     <span>검색</span>
                 </button>
             </div>
@@ -560,32 +354,19 @@
             <div class="header-right-zone">
                 <span class="client-service-text">클라이언트 서비스</span>
                 <a href="#" class="utility-icon-link" aria-label="위시리스트">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                    </svg>
+                    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                 </a>
                 <a href="#" class="utility-icon-link" aria-label="마이페이지">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
+                    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                 </a>
                 <a href="#" class="utility-icon-link" aria-label="쇼핑백">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                        <path d="M16 10a4 4 0 0 1-8 0"></path>
-                    </svg>
+                    <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
                     <span class="cart-badge">0</span>
                 </a>
                 
                 <div class="lang-selector-container">
                     <button class="utility-icon-link" style="background:none; border:none; cursor:pointer;" onclick="toggleLangDropdown(event)" aria-label="언어 선점">
-                        <svg viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <path d="M2 12h20"></path>
-                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                        </svg>
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
                     </button>
                     <ul class="lang-dropdown-menu" id="langDropdown">
                         <li><a href="./brand-story.html" class="current">KR (한국어)</a></li>
@@ -596,19 +377,14 @@
                 </div>
             </div>
         </div>
-
-        <div class="header-sub-menu-line">
-            <ul>
-                <li><a href="./brand-story.html" class="sub-nav-active current">듀페리 스토리</a></li>
-                <li><a href="./homme.html" class="sub-nav-active">옴므</a></li>
-                <li><a href="#" class="sub-nav-muted">스킨케어</a></li>
-                <li><a href="#" class="sub-nav-muted">오브제</a></li>
-                <li><a href="#" class="sub-nav-muted">기프트</a></li>
-            </ul>
-        </div>
     </header>
 
     <section class="story-hero-section">
+        <video class="cinematic-stream" autoplay muted loop playsinline>
+            <source src="../video/u6958272478_glossy_black_Audi_luxury_sedan_front_three-quarte_dd8c59aa-8cff-464a-a1d6-2fb64ba83f69_0.mp4" type="video/mp4">
+        </video>
+        <div class="hero-video-overlay"></div>
+
         <div class="hero-title-group">
             <p class="hero-subtitle">옴므</p>
             <h1 class="hero-title">SS26 기프트 컬렉션</h1>
@@ -625,7 +401,7 @@
     <section class="story-belief-section">
         <div class="belief-content">
             <div class="belief-logo-wrapper">
-                <img src="../../images/brand_story_brand_belief_logo_pc_kr_240312.png" alt="DUFERI EMBLEM LOGO">
+                <img src="../images/brand_story_brand_belief_logo_pc_kr_240312.png" alt="DUFERI EMBLEM LOGO">
             </div>
             <h2 class="belief-title">DUFERI</h2>
             <p class="belief-description">
@@ -641,7 +417,7 @@
         <div class="footer-container">
             <div class="footer-statement-area">
                 <div class="footer-tagline">HERE. NOW. MYSELF</div>
-                <div class="footer-subtitle">지금 여기에서, 지극히 나답게 — BORN RARE</div>
+                <div class="footer-subtitle">지금 여기에서, 가장 나답게</div>
                 <div class="footer-mini-logo">DUFERI</div>
             </div>
 
@@ -654,7 +430,7 @@
                         <li><a href="#">캠페인 라이브러리</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
+                <div class="footer-grid-item footer-column">
                     <h3>사이트맵</h3>
                     <ul>
                         <li><a href="./homme.html">옴므 (HOMME)</a></li>
