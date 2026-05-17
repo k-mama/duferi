@@ -177,7 +177,7 @@
             background-color: currentColor;
         }
 
-        /* 첫 출시 집중을 위한 나머지 메뉴 뮤트 처리 (0.3) */
+        /* 첫 출시 마케팅 집중을 위한 미출시 메뉴 뮤트 처리 (0.3) */
         .sub-nav-muted {
             opacity: 0.3 !important;
             cursor: default;
@@ -227,11 +227,11 @@
         .hero-action-links a { font-size: 13px; font-weight: 500; color: #ffffff; text-decoration: none; border-bottom: 1px solid #ffffff; padding-bottom: 3px; }
 
         /* ==========================================================
-           [위치 수정] 로고 이미지 아래 배치된 시네마틱 풀-블리드 비디오
+           [레이아웃 튜닝] 가로 폭 100% 매칭 시네마틱 풀 비디오 섹션
            ========================================================== */
         .main-video-section {
             width: 100%;
-            height: 90vh; /* 명품관 시네마 렌즈 스케일 */
+            height: 90vh; 
             background-color: #000;
             position: relative;
             overflow: hidden;
@@ -243,7 +243,7 @@
             object-fit: cover; 
         }
 
-        /* [디자인 격상] 저작권과 에마 권 작가님의 영혼을 담은 비디오 오버레이 락업 */
+        /* [루이비통 감성 100% 이식] 비디오 하단 정렬 메인메뉴 5종 오버레이 팩 */
         .video-overlay-text {
             position: absolute;
             bottom: 80px;
@@ -256,22 +256,42 @@
             padding: 0 20px;
         }
 
-        .video-overlay-text h2 {
-            font-size: 46px;
-            font-weight: 200;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            text-shadow: 0 4px 15px rgba(0,0,0,0.4);
-        }
-
         .video-overlay-text p {
             font-size: 13px;
             font-weight: 300;
             letter-spacing: 0.4em;
             color: rgba(255, 255, 255, 0.7);
             text-transform: uppercase;
+            margin-bottom: 12px;
         }
+
+        .video-overlay-text h2 {
+            font-size: 38px;
+            font-weight: 200; /* 정결하고 얇게 뺀 메인 타이틀 */
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+
+        /* 루이비통 리조트 컬렉션 스타일 가로 배열 링크 바 */
+        .video-action-menu-row {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+        }
+
+        .video-action-menu-row a {
+            font-size: 14px;
+            font-weight: 500;
+            color: #ffffff;
+            text-decoration: none;
+            border-bottom: 1px solid #ffffff; /* 우아한 화이트 하단 선 */
+            padding-bottom: 4px;
+            letter-spacing: 0.05em;
+            transition: opacity 0.2s;
+        }
+        .video-action-menu-row a:hover { opacity: 0.7; }
 
         /* 브랜드 철학 섹션 (화이트) */
         .story-belief-section {
@@ -287,16 +307,13 @@
         .belief-title { font-size: 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.4em; margin-bottom: 40px; }
         .belief-description { font-size: 14px; color: #333; line-height: 2.2; word-break: keep-all; }
 
-        /* ==========================================================
-           [캡처본 완벽 반영] 하이엔드 와이드 블랙 푸터 
-           ========================================================== */
+        /* 와이드 블랙 푸터 */
         footer { background-color: #000000; color: #ffffff; padding: 100px 40px 60px; }
         .footer-container { max-width: 1100px; margin: 0 auto; }
         
-        /* 저작권의 숭고함을 푸터 마스터 슬로건으로 락업 */
+        /* 푸터 메인 슬로건 오리지널 스케일 복구 */
         .footer-statement-area { text-align: center; padding-bottom: 80px; border-bottom: 1px solid #1a1a1a; margin-bottom: 60px; }
         .footer-tagline { font-size: 32px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 15px; }
-        .footer-subtitle { font-size: 13px; font-weight: 300; color: #aaaaaa; letter-spacing: 0.08em; margin-bottom: 40px; }
         .footer-mini-logo { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.4em; color: #ffffff; }
         
         .footer-grid { display: grid; grid-template-columns: repeat(2, 1fr); row-gap: 50px; column-gap: 40px; border-bottom: 1px solid #1a1a1a; padding-bottom: 60px; }
@@ -319,7 +336,8 @@
         @media (max-width: 768px) {
             .header-center-zone a { font-size: 22px; }
             .header-sub-menu-line { display: none; }
-            .video-overlay-text h2 { font-size: 28px; }
+            .video-overlay-text h2 { font-size: 26px; }
+            .video-action-menu-row { flex-direction: column; gap: 15px; align-items: center; }
             .footer-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -397,9 +415,17 @@
         <video autoplay muted loop playsinline>
             <source src="../video/u6958272478_glossy_black_Audi_luxury_sedan_front_three-quarte_dd8c59aa-8cff-464a-a1d6-2fb64ba83f69_0.mp4" type="video/mp4">
         </video>
+        
         <div class="video-overlay-text">
-            <h2>BORN RARE</h2>
-            <p>THE MASTER PHILOSOPHY BY EMMA KWON</p>
+            <p>THE NEW VISION</p>
+            <h2>DUFERI CAMPAIGN</h2>
+            <div class="video-action-menu-row">
+                <a href="./brand-story.html">듀페리 스토리</a>
+                <a href="./homme.html">옴므</a>
+                <a href="#">스킨케어</a>
+                <a href="#">오브제</a>
+                <a href="#">기프트</a>
+            </div>
         </div>
     </section>
 
@@ -420,8 +446,7 @@
     <footer>
         <div class="footer-container">
             <div class="footer-statement-area">
-                <div class="footer-tagline">BORN RARE</div>
-                <div class="footer-subtitle">지금 여기에서, 지극히 나답게 — © EMMA KWON</div>
+                <div class="footer-tagline">HERE. NOW. MYSELF</div>
                 <div class="footer-mini-logo">DUFERI</div>
             </div>
             <div class="footer-grid">
