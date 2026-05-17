@@ -21,7 +21,7 @@
             line-height: 1.6;
         }
 
-        /* 블랙 배경 헤더 */
+        /* 블랙 배경 컴팩트 헤더 */
         header {
             position: fixed;
             top: 0;
@@ -40,7 +40,6 @@
             margin-bottom: 20px; 
         }
 
-        /* DUFERI 영문 오리지널 로고 아우라 유지 */
         .logo-area a {
             font-size: 30px; 
             font-weight: 700; 
@@ -53,25 +52,27 @@
         nav ul {
             display: flex;
             list-style: none;
-            gap: 50px; /* 한글 메뉴 리딩 공간을 위해 간격 소폭 확장 */
+            gap: 50px; 
             justify-content: center; 
         }
 
-        /* [피드백 반영] 한글 맞춤형 명품 타이포그래피 세팅 */
         nav ul li a {
             font-size: 14px; 
-            font-weight: 500; /* 한글은 500~600이 가장 뭉개짐 없이 우아하고 두껍습니다 */
-            letter-spacing: 0.12em; /* 한글 고유의 아름다운 자간 밸런스 */
+            font-weight: 500; 
+            letter-spacing: 0.12em; 
             color: #ffffff; 
             text-decoration: none;
             position: relative;
-            transition: color 0.3s;
+            opacity: 0.75;
+            transition: opacity 0.3s;
         }
+
+        nav ul li a:hover { opacity: 1; }
 
         /* '듀페리 스토리' 활성화 상태 흰색 밑줄 */
         nav ul li a.active {
             font-weight: 600;
-            color: #ffffff;
+            opacity: 1;
         }
         nav ul li a.active::after {
             content: '';
@@ -83,52 +84,129 @@
             background-color: #ffffff; 
         }
 
-        /* 헤라 스타일 메인 무드 섹션 */
+        /* [요청 반영] 우측 상단 슬림 지구본 내비게이터 바 */
+        .lang-selector-wrapper {
+            position: absolute;
+            right: 40px;
+            top: 38px; /* 로고 높이와 완벽한 시각적 수평 락업 */
+        }
+
+        .lang-trigger-btn {
+            background: none;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.7;
+            transition: opacity 0.3s, transform 0.3s ease;
+        }
+
+        .lang-trigger-btn:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        /* 하이엔드 라인아트 지구본 SVG 스타일 */
+        .lang-trigger-btn svg {
+            width: 21px;
+            height: 21px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.2;
+        }
+
+        /* 시크한 명품관 전용 다크 드롭다운 박스 */
+        .lang-dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 130%;
+            right: 0;
+            background-color: #111111;
+            border: 1px solid #222222;
+            min-width: 140px;
+            list-style: none;
+            padding: 8px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: elegantFadeIn 0.25s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        .lang-dropdown-menu.show {
+            display: block;
+        }
+
+        .lang-dropdown-menu li a {
+            display: block;
+            padding: 10px 20px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            opacity: 0.6;
+            transition: opacity 0.2s, background-color 0.2s;
+        }
+
+        .lang-dropdown-menu li a:hover {
+            opacity: 1;
+            background-color: #1a1a1a;
+        }
+
+        /* 한국어 선택 상태 강조 */
+        .lang-dropdown-menu li a.current {
+            font-weight: 600;
+            opacity: 1;
+            color: #ffffff;
+        }
+
+        /* 1번 섹션: 블랙 히어로 (헤라 벤치마킹 비율) */
         .story-hero-section {
+            background-color: #000000; 
+            color: #ffffff;
             padding: 280px 20px 140px; 
             text-align: center;
-            background-color: #ffffff;
         }
 
         .hero-title-group {
-            max-width: 900px;
+            max-width: 700px; 
             margin: 0 auto;
         }
 
         .hero-title {
-            font-size: 46px;
-            font-weight: 300;
-            letter-spacing: 0.15em;
+            font-size: 36px; 
+            font-weight: 700; 
+            letter-spacing: 0.08em;
             text-transform: uppercase;
-            color: #111111;
-            margin-bottom: 45px;
             line-height: 1.3;
+            margin-bottom: 35px;
         }
 
         .hero-description {
-            font-size: 16px; 
-            color: #555555;
-            letter-spacing: 0.03em;
-            line-height: 2.3;
+            font-size: 14px; 
+            font-weight: 300;
+            color: #cccccc; 
+            letter-spacing: -0.01em;
+            line-height: 1.8;
             word-break: keep-all; 
         }
 
-        /* 헤라 스타일 블랙 배경 시그니처 섹션 */
+        /* 2번 섹션: 화이트 비리프 */
         .story-belief-section {
-            background-color: #000000;
-            color: #ffffff;
-            padding: 160px 20px;
+            background-color: #ffffff; 
+            color: #111111;
+            padding: 120px 20px 140px;
             text-align: center;
         }
 
         .belief-content {
-            max-width: 900px;
+            max-width: 700px;
             margin: 0 auto;
         }
 
         .belief-logo-wrapper {
-            width: 240px;
-            margin: 0 auto 60px;
+            width: 160px; 
+            margin: 0 auto 40px;
         }
         .belief-logo-wrapper img {
             width: 100%;
@@ -137,42 +215,219 @@
         }
 
         .belief-title {
-            font-size: 32px;
-            font-weight: 300;
+            font-size: 20px; 
+            font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 0.3em;
-            margin-bottom: 45px;
+            letter-spacing: 0.4em; 
+            margin-bottom: 40px;
+            color: #111111;
         }
 
         .belief-description {
-            font-size: 16px; 
-            color: #cccccc;
-            letter-spacing: 0.03em;
-            line-height: 2.3;
+            font-size: 14px; 
+            font-weight: 400;
+            color: #333333; 
+            letter-spacing: -0.01em;
+            line-height: 2.0;
             word-break: keep-all;
         }
 
-        /* 미니멀 럭셔리 푸터 */
+        /* ==========================================
+           [캡처본 완벽 반영] 하이엔드 와이드 블랙 푸터 
+           ========================================== */
         footer {
-            padding: 60px 40px;
-            background-color: #ffffff;
-            border-top: 1px solid #f2f2f2;
+            background-color: #000000;
+            color: #ffffff;
+            padding: 100px 40px 60px;
+        }
+
+        .footer-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .footer-statement-area {
             text-align: center;
+            padding-bottom: 80px;
+            border-bottom: 1px solid #1a1a1a;
+            margin-bottom: 60px;
+        }
+
+        .footer-tagline {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .footer-subtitle {
+            font-size: 13px;
+            font-weight: 300;
+            color: #aaaaaa;
+            letter-spacing: 0.05em;
+            margin-bottom: 40px;
+        }
+
+        .footer-mini-logo {
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            color: #ffffff;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            row-gap: 50px;
+            column-gap: 40px;
+            padding-bottom: 60px;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .footer-column h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 15px;
+        }
+
+        .footer-column ul li a {
+            font-size: 13px;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 400;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .footer-column ul li a:hover { opacity: 1; }
+
+        .social-links {
+            display: flex;
+            background-color: #222222;
+            width: fit-content;
+            border: 1px solid #111111;
+        }
+
+        .social-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 45px;
+            height: 45px;
+            background-color: #000000;
+            color: #ffffff;
+            text-decoration: none;
             font-size: 11px;
-            letter-spacing: 0.2em;
-            color: #888888;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            transition: background-color 0.3s;
+            border-right: 1px solid #111111;
+        }
+        .social-icon:last-child { border-right: none; }
+        .social-icon:hover { background-color: #161616; }
+
+        .country-selector {
+            position: relative;
+            max-width: 320px;
+            width: 100%;
+        }
+
+        .country-selector select {
+            width: 100%;
+            padding: 15px 20px;
+            background-color: #000000;
+            color: #ffffff;
+            border: 1px solid #333333;
+            font-size: 13px;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .country-selector::after {
+            content: '↓'; 
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 11px;
+            color: #ffffff;
+            pointer-events: none;
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            font-size: 12px;
+            color: #aaaaaa;
             line-height: 2;
         }
 
-        /* 반응형 모바일 대응 */
+        .legal-links {
+            margin-bottom: 15px;
+        }
+
+        .legal-links a {
+            color: #aaaaaa;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        .legal-links a.highlight {
+            color: #ffffff; 
+            font-weight: 600;
+        }
+
+        .customer-service {
+            margin-bottom: 30px;
+            color: #888888;
+        }
+
+        .customer-service span {
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .copyright {
+            font-size: 11px;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* 애니메이션 효과 */
+        @keyframes elegantHeaderFade {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes elegantFadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 반응형 모바일 최적화 */
         @media (max-width: 768px) {
             header { padding: 25px 20px 20px; }
-            .logo-area { margin-bottom: 12px; }
             .logo-area a { font-size: 24px; }
-            nav ul { gap: 18px; flex-wrap: wrap; }
+            .lang-selector-wrapper { position: relative; right: auto; top: auto; margin-top: 15px; }
+            nav ul { gap: 18px; flex-wrap: wrap; margin-top: 10px; }
             nav ul li a { font-size: 12px; }
-            .story-hero-section { padding: 200px 10px 80px; }
-            .hero-title { font-size: 30px; }
+            .story-hero-section { padding: 220px 15px 100px; }
+            .hero-title { font-size: 28px; }
+            .footer-grid { grid-template-columns: 1fr; row-gap: 40px; }
+            .footer-tagline { font-size: 24px; }
         }
     </style>
 </head>
@@ -182,6 +437,7 @@
         <div class="logo-area">
             <a href="./index.html">DUFERI</a>
         </div>
+        
         <nav>
             <ul>
                 <li><a href="./brand-story.html" class="active">듀페리 스토리</a></li>
@@ -191,13 +447,29 @@
                 <li><a href="./gift.html">기프트</a></li>
             </ul>
         </nav>
+
+        <div class="lang-selector-wrapper">
+            <button class="lang-trigger-btn" id="langBtn" onclick="toggleLangDropdown(event)" aria-label="언어 변경">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M2 12h20"></path>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+            </button>
+            <ul class="lang-dropdown-menu" id="langDropdown">
+                <li><a href="./brand-story.html" class="current">KR (한국어)</a></li>
+                <li><a href="../en/brand-story.html">EN (English)</a></li>
+                <li><a href="../zh/brand-story.html">ZH (中文)</a></li>
+                <li><a href="../ja/brand-story.html">JA (日本語)</a></li>
+            </ul>
+        </div>
     </header>
 
     <section class="story-hero-section">
         <div class="hero-title-group">
-            <h1 class="hero-title">REFINED DIGNITY.<br>UNCHANGING ELEGANCE.</h1>
+            <h1 class="hero-title">REFINED DIGNITY<br>UNCHANGING ELEGANCE</h1>
             <p class="hero-description">
-                DUFERI는 고결한 이의 정제된 아우라와 변치 않는 우아함에 주목하고, 이를 품격 있는 라이프스타일로 재해석하여 시대가 지나도 빛을 잃지 않는 시그니처 엑설런스를 제안합니다. 우리는 단순히 외면을 가꾸는 것이 아니라, 내면의 깊이와 dignity를 통해 이 시대의 진정한 우아함을 완성하는 하이엔드 브랜드입니다.
+                듀페리는 서울의 역동적인 에너지 속에서 고결한 이의 정제된 아우라와 변치 않는 우아함에 주목하고, 이를 품격 있는 라이프스타일로 재해석하여 시대가 지나도 빛을 잃지 않는 시그니처 엑설런스를 제안합니다.
             </p>
         </div>
     </section>
@@ -205,19 +477,97 @@
     <section class="story-belief-section">
         <div class="belief-content">
             <div class="belief-logo-wrapper">
-                <img src="../../images/brand_story_brand_belief_logo_pc_kr_240312.png" alt="DUFERI BRAND BELIEF LOGO">
+                <img src="../../images/brand_story_brand_belief_logo_pc_kr_240312.png" alt="DUFERI EMBLEM LOGO">
             </div>
             
             <h2 class="belief-title">DUFERI</h2>
             <p class="belief-description">
-                DUFERI가 추구하는 품격하고 아름다움에 대한 신념은 나 자신의 내면과 본질에 있습니다. 모두가 고유한 자신만의 품격을 발현할 수 있도록, DUFERI는 정제된 시그니처 해석과 변치 않는 가치를 통해 이 시대의 진정한 우아함을 제안합니다. 우리는 시간의 흐름 속에서도 더욱 깊어지는 내면의 힘을 믿습니다.
+                듀페리가 추구하는 품격과 아름다움에 대한 신념은 나 자신의 내면과 본질에 있습니다.<br>
+                모두가 고유한 자신만의 아우라를 발현할 수 있도록,<br>
+                늘 한 발 앞선 해석과 독창적인 가치를 통해 듀페리만의 진정한 우아함을<br>
+                시대정신에 맞게 발전시키고 있습니다.
             </p>
         </div>
     </section>
 
     <footer>
-        <p>© 2026 DUFERI. All Rights Reserved.</p>
+        <div class="footer-container">
+            <div class="footer-statement-area">
+                <div class="footer-tagline">HERE. NOW. MYSELF</div>
+                <div class="footer-subtitle">지금 여기에서, 지극히 나답게 — BORN RARE</div>
+                <div class="footer-mini-logo">DUFERI</div>
+            </div>
+
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>듀페리 스토리</h3>
+                    <ul>
+                        <li><a href="./brand-story.html">브랜드 소개</a></li>
+                        <li><a href="#">듀페리 에이전트 소사이어티</a></li>
+                        <li><a href="#">캠페인 라이브러리</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>사이트맵</h3>
+                    <ul>
+                        <li><a href="./homme.html">옴므 (HOMME)</a></li>
+                        <li><a href="./skincare.html">스킨케어 (SKINCARE)</a></li>
+                        <li><a href="./objets.html">오브제 (OBJETS)</a></li>
+                        <li><a href="./gift.html">기프트 (GIFT)</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>FOLLOW US</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-icon">FB</a>
+                        <a href="#" class="social-icon">IG</a>
+                        <a href="#" class="social-icon">YT</a>
+                        <a href="#" class="social-icon">TALK</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>SELECT COUNTRY / REGION</h3>
+                    <div class="country-selector">
+                        <select onchange="location = this.value;">
+                            <option value="./brand-story.html" selected>대한민국 / 한국어</option>
+                            <option value="../en/brand-story.html">International / English</option>
+                            <option value="../zh/brand-story.html">中国 / 简体中文</option>
+                            <option value="../ja/brand-story.html">日本 / 日本語</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="legal-links">
+                    <a href="#">서비스 이용약관</a> | 
+                    <a href="#" class="highlight">개인정보처리방침</a> | 
+                    <a href="#">영상정보처리방침</a>
+                </div>
+                <div class="customer-service">
+                    고객상담팀(수신자요금부담) <span>080-XXX-XXXX</span> (상담시간 월~금 : AM 09:00 ~ PM 06:00)
+                </div>
+                <div class="copyright">
+                    © 2026 DUFERI CORPORATION. All rights reserved.
+                </div>
+            </div>
+        </div>
     </footer>
 
+    <script>
+        function toggleLangDropdown(event) {
+            event.stopPropagation(); // 버튼 클릭 시 윈도우 클릭 이벤트로 전파되는 것 방지
+            const dropdown = document.getElementById('langDropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        // 언어 창이 열려있을 때 화면의 다른 아무 공간이나 누르면 우아하게 닫히는 디테일
+        window.addEventListener('click', function() {
+            const dropdown = document.getElementById('langDropdown');
+            if (dropdown && dropdown.classList.contains('show')) {
+                dropdown.classList.remove('show');
+            }
+        });
+    </script>
 </body>
 </html>
