@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DUFERI STORY | DUFERI 공식 온라인 스토어</title>
+    <title>듀페리 스토리 | DUFERI 공식 온라인 스토어</title>
     <style>
         /* 럭셔리 미니멀리즘 베이스 세팅 */
         * {
@@ -15,13 +15,13 @@
         body {
             background-color: #ffffff;
             color: #111111;
-            font-family: "Helvetica Neue", "Apple SD Gothic Neo", sans-serif;
+            font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Helvetica Neue", sans-serif;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
             line-height: 1.6;
         }
 
-        /* [피드백 반영] 블랙 배경 & 볼드 화이트 텍스트 헤더 */
+        /* 블랙 배경 헤더 */
         header {
             position: fixed;
             top: 0;
@@ -32,61 +32,60 @@
             flex-direction: column; 
             align-items: center; 
             z-index: 1000;
-            background-color: #000000; /* 헤더 배경 블랙 */
-            border-bottom: 1px solid #222222; /* 미세한 경계선 */
+            background-color: #000000; 
+            border-bottom: 1px solid #1a1a1a; 
         }
 
         .logo-area {
             margin-bottom: 20px; 
         }
 
-        /* [피드백 반영] 로고 글씨 두껍고 흰색 */
+        /* DUFERI 영문 오리지널 로고 아우라 유지 */
         .logo-area a {
             font-size: 30px; 
-            font-weight: 700; /* 더 두껍게 */
+            font-weight: 700; 
             text-transform: uppercase;
             letter-spacing: 0.4em;
-            color: #ffffff; /* 흰색 글씨 */
+            color: #ffffff; 
             text-decoration: none;
-            transition: opacity 0.3s;
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 45px; 
+            gap: 50px; /* 한글 메뉴 리딩 공간을 위해 간격 소폭 확장 */
             justify-content: center; 
         }
 
-        /* [피드백 반영] 메인메뉴 글씨 두껍고 흰색 */
+        /* [피드백 반영] 한글 맞춤형 명품 타이포그래피 세팅 */
         nav ul li a {
             font-size: 14px; 
-            font-weight: 600; /* 더 두껍게 */
-            text-transform: uppercase;
-            letter-spacing: 0.2em; 
-            color: #ffffff; /* 흰색 글씨 */
+            font-weight: 500; /* 한글은 500~600이 가장 뭉개짐 없이 우아하고 두껍습니다 */
+            letter-spacing: 0.12em; /* 한글 고유의 아름다운 자간 밸런스 */
+            color: #ffffff; 
             text-decoration: none;
             position: relative;
             transition: color 0.3s;
         }
 
-        /* 'DUFERI STORY' 활성화 상태 밑줄 (흰색으로 변경) */
+        /* '듀페리 스토리' 활성화 상태 흰색 밑줄 */
         nav ul li a.active {
-            font-weight: 700;
+            font-weight: 600;
+            color: #ffffff;
         }
         nav ul li a.active::after {
             content: '';
             position: absolute;
             bottom: -6px;
-            left: 0;
-            width: 100%;
-            height: 2px; /* 밑줄도 조금 더 선명하게 */
-            background-color: #ffffff; /* 흰색 밑줄 */
+            left: -2px;
+            width: calc(100% + 4px);
+            height: 2px; 
+            background-color: #ffffff; 
         }
 
         /* 헤라 스타일 메인 무드 섹션 */
         .story-hero-section {
-            padding: 280px 20px 140px; /* 헤더 높이 확보를 위한 상단 패딩 */
+            padding: 280px 20px 140px; 
             text-align: center;
             background-color: #ffffff;
         }
@@ -170,8 +169,8 @@
             header { padding: 25px 20px 20px; }
             .logo-area { margin-bottom: 12px; }
             .logo-area a { font-size: 24px; }
-            nav ul { gap: 15px; flex-wrap: wrap; }
-            nav ul li a { font-size: 11px; }
+            nav ul { gap: 18px; flex-wrap: wrap; }
+            nav ul li a { font-size: 12px; }
             .story-hero-section { padding: 200px 10px 80px; }
             .hero-title { font-size: 30px; }
         }
@@ -185,11 +184,11 @@
         </div>
         <nav>
             <ul>
-                <li><a href="./brand-story.html" class="active">DUFERI STORY</a></li>
-                <li><a href="./homme.html">HOMME</a></li>
-                <li><a href="./skincare.html">SKINCARE</a></li>
-                <li><a href="./objets.html">OBJETS</a></li>
-                <li><a href="./gift.html">GIFT</a></li>
+                <li><a href="./brand-story.html" class="active">듀페리 스토리</a></li>
+                <li><a href="./homme.html">옴므</a></li>
+                <li><a href="./skincare.html">스킨케어</a></li>
+                <li><a href="./objets.html">오브제</a></li>
+                <li><a href="./gift.html">기프트</a></li>
             </ul>
         </nav>
     </header>
@@ -211,7 +210,7 @@
             
             <h2 class="belief-title">DUFERI</h2>
             <p class="belief-description">
-                DUFERI가 추구하는 품격과 아름다움에 대한 신념은 나 자신의 내면과 본질에 있습니다. 모두가 고유한 자신만의 품격을 발현할 수 있도록, DUFERI는 정제된 시그니처 해석과 변치 않는 가치를 통해 이 시대의 진정한 우아함을 제안합니다. 우리는 시간의 흐름 속에서도 더욱 깊어지는 내면의 힘을 믿습니다.
+                DUFERI가 추구하는 품격하고 아름다움에 대한 신념은 나 자신의 내면과 본질에 있습니다. 모두가 고유한 자신만의 품격을 발현할 수 있도록, DUFERI는 정제된 시그니처 해석과 변치 않는 가치를 통해 이 시대의 진정한 우아함을 제안합니다. 우리는 시간의 흐름 속에서도 더욱 깊어지는 내면의 힘을 믿습니다.
             </p>
         </div>
     </section>
