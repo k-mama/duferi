@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DUFERI</title>
+    <style>
+        /* 듀페리 브랜드 정체성을 담은 미니멀 럭셔리 로딩 스크린 */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #111111;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            letter-spacing: 0.35em;
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: 300;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeInLettering 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        /* 고급스러운 극소 미니멀 라인 로더 */
+        .loader-bar {
+            width: 50px;
+            height: 1px;
+            background-color: #f0f0f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loader-bar::after {
+            content: '';
+            display: block;
+            width: 25px;
+            height: 1px;
+            background-color: #111111;
+            position: absolute;
+            animation: elegantLoading 1.8s infinite ease-in-out;
+        }
+
+        /* 자바스크립트 차단 또는 로딩 지연 시 노출될 수동 선택 링크 */
+        .fallback-gate {
+            margin-top: 50px;
+            font-size: 10px;
+            display: none;
+            animation: fadeInGently 0.5s ease forwards;
+        }
+
+        .fallback-gate a {
+            color: #999999;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+
+        .fallback-gate a:hover {
+            color: #111111;
+        }
+
+        /* 부드러운 하이엔드 애니메이션 효과 */
+        @keyframes fadeInLettering {
+            from { opacity: 0; letter-spacing: 0.45em; transform: translateY(5px); }
+            to { opacity: 1; letter-spacing: 0.35em; transform: translateY(0); }
+        }
+
+        @keyframes elegantLoading {
+            0% { left: -25px; }
+            100% { left: 50px; }
+        }
+
+        @keyframes fadeInGently {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+    
+    <script>
+        // 0.1초 만에 언어를 감지해 해당 폴더로 쏘아 보내는 스마트 스크립트
+        (function() {
+            try {
+                // 사용자의 브라우저 기본 언어 감지
+                const browserLang = (navigator.language || navigator.userLanguage).toLowerCase();
+                let targetLanguage = 'en'; // 기본 글로벌 설정은 영어(en)
+
+                // 언어별 앞 두 글자 매칭 분기 규칙
+                if (browserLang.startsWith('ko')) {
+                    targetLanguage = 'ko';
+                } else if (browserLang.startsWith('ja')) {
+                    targetLanguage = 'ja';
+                } else if (browserLang.startsWith('zh')) {
+                    targetLanguage = 'zh';
+                }
+
+                // 해당 언어 폴더의 메인 홈으로 즉시 리다이렉트
+                window.location.href = './' + targetLanguage + '/index.html';
+            } catch (error) {
+                // 예외 에러 발생 시 안전하게 영어 버전으로 포워딩
+                window.location.href = './en/index.html';
+            }
+        })();
+    </script>
+</head>
+<body>
+
+    <div class="logo">DUFERI</div>
+    <div class="loader-bar"></div>
+
+    <div class="fallback-gate" id="fallbackGate">
+        <a href="./ko/index.html">KOREA</a>
+        <a href="./en/index.html">INTERNATIONAL</a>
+        <a href="./zh/index.html">CHINA</a>
+        <a href="./ja/index.html">JAPAN</a>
+    </div>
+
+    <script>
+        // 네트워크 지연 등으로 2.5초 이상 화면이 머무를 때만 수동 선택 링크를 부드럽게 띄웁니다.
+        setTimeout(function() {
+            const gate = document.getElementById('fallbackGate');
+            if (gate) gate.style.display = 'block';
+        }, 2500);
+    </script>
+
+</body>
+</html>
