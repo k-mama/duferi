@@ -174,30 +174,30 @@
         header:hover .lang-dropdown-menu li a { color: #111111; }
 
         /* ==========================================================
-           [비주얼 매핑] 가로폭 100% 대응 아우디 세단 풀 비디오 히어로 섹션
+           [핵심 수정] 가로폭에 맞춰 영상과 섹션이 통째로 줄어드는 반응형 빌드
            ========================================================== */
         .story-hero-section {
             position: relative;
             width: 100%;
-            height: 100vh;
+            height: auto; /* 100vh 잠금을 풀고 유동형으로 전환 */
+            aspect-ratio: 16 / 9; /* [시네마틱 동기화] 가로 폭이 줄면 세로도 황금비로 같이 수축 */
             overflow: hidden;
             background-color: #000000;
             display: flex;
             justify-content: center;
             align-items: flex-end; 
             text-align: center;
-            padding-bottom: 95px; /* 하단 2줄 레이아웃 안정감을 위해 여백 세밀 조정 */
+            padding-bottom: 5%; /* 고정 px 대신 % 패딩으로 하단 메뉴 간격 유동 제어 */
             color: #ffffff;
         }
 
         .cinematic-stream {
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            transform: translate(-50%, -50%);
+            object-fit: cover; /* 정해진 16:9 규격 안을 꽉 채워 잘림 현상 제거 */
             z-index: 1;
         }
 
@@ -207,7 +207,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.45) 100%);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.5) 100%);
             z-index: 2;
         }
 
@@ -216,68 +216,53 @@
             z-index: 3;
             max-width: 800px;
             margin: 0 auto;
-            text-shadow: 0 2px 14px rgba(0,0,0,0.25);
+            text-shadow: 0 2px 14px rgba(0,0,0,0.3);
         }
 
-        /* 옴므 반영 완료 */
-        .hero-subtitle {
-            font-size: 14px;
-            font-weight: 400;
-            letter-spacing: 0.15em;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-        }
-
-        /* SS26 기프트 컬렉션 반영 완료 */
+        /* 옴므 상단 소제목 완벽 탈락 및 타이포 세련미 락업 */
         .hero-title {
-            font-size: 42px; 
-            font-weight: 700; 
-            letter-spacing: 0.08em;
+            font-size: 44px; 
+            font-weight: 500; 
+            letter-spacing: 0.15em; 
             text-transform: uppercase;
             line-height: 1.2;
-            margin-bottom: 35px;
+            margin-bottom: 45px; 
         }
 
-        /* ==========================================================
-           [요청 반영] 2줄 구성 + 얇은 폰트 + 밑줄 제거 히어로 메뉴 아키텍처
-           ========================================================== */
+        /* 2줄 구성 + 얇은 폰트 + 밑줄 제거 히어로 메뉴 아키텍처 */
         .hero-action-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 16px; /* 1단과 2단 사이의 우아한 수직 공백 간격 */
+            gap: 16px; 
         }
 
         .hero-action-row {
             display: flex;
             justify-content: center;
-            gap: 40px; /* 글자 사이의 시원한 수평 여백 배치 */
+            gap: 45px; 
         }
 
         .hero-action-row a {
             font-size: 14px;
-            font-weight: 300; /* [피드백] 볼드 없이 극도로 가늘고 정갈한 서체 기용 */
+            font-weight: 300; 
             color: #ffffff;
-            text-decoration: none; /* [피드백] 밑줄 완전 제거 */
-            border-bottom: none;   /* [피드백] 밑줄 보더 완전 제거 */
-            padding-bottom: 0;
-            letter-spacing: 0.1em;
+            text-decoration: none; 
+            letter-spacing: 0.12em;
             transition: opacity 0.3s ease;
         }
 
-        /* 상단 1라인: 활성화 메인 동선 */
         .hero-action-row.line-1 a {
             opacity: 0.95;
         }
         .hero-action-row.line-1 a:hover {
-            opacity: 0.7;
+            opacity: 0.6;
         }
 
-        /* 하단 2라인: 미출시 카테고리 (도드라지지 않게 은은한 명도 차등 부여) */
         .hero-action-row.line-2 a {
-            opacity: 0.35; /* 얇은 폰트와 결합하여 시선 분산을 완벽하게 억제 */
+            opacity: 0.35; 
             cursor: default;
-            pointer-events: none; /* 클릭 방지 */
+            pointer-events: none; 
         }
 
         /* 2번 섹션: 화이트 비리프 서사 단락 */
@@ -336,12 +321,23 @@
         .copyright { font-size: 11px; color: #666666; text-transform: uppercase; letter-spacing: 0.05em; }
 
         @media (max-width: 992px) { .client-service-text { display: none; } }
+        
+        /* ==========================================================
+           [모바일 최적화 수정] 모바일 폭에서 가독성과 터치 영역을 확보하는 비율 재배치
+           ========================================================== */
         @media (max-width: 768px) {
             .header-main-line { padding: 20px; }
             .header-center-zone a { font-size: 22px; }
             .icon-text-btn span { display: none; }
-            .hero-title { font-size: 26px; }
-            .hero-action-row { gap: 20px; }
+            
+            /* [모바일 전용 비율 변환] 가로가 좁아질 때 화면이 너무 납작해지는 것을 방지하는 명품 가이드 설정 */
+            .story-hero-section { 
+                aspect-ratio: 4 / 3; /* 모바일 전용 정갈한 상자형 프레임 */
+                min-height: 440px; /* 고정 최소 높이 장착 */
+                padding-bottom: 40px;
+            }
+            .hero-title { font-size: 26px; letter-spacing: 0.1em; margin-bottom: 30px; }
+            .hero-action-row { gap: 25px; }
             .hero-action-row a { font-size: 12px; }
             .footer-grid { grid-template-columns: 1fr; }
         }
@@ -401,7 +397,6 @@
         <div class="hero-video-overlay"></div>
 
         <div class="hero-title-group">
-            <!--p class="hero-subtitle">옴므</p-->
             <h1 class="hero-title">SS26 기프트 컬렉션</h1>
             
             <div class="hero-action-container">
