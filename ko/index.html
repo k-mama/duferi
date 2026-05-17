@@ -21,57 +21,58 @@
             line-height: 1.6;
         }
 
-        /* [크기 밸런스 조정] 상단 내비게이션 바 헤더 */
+        /* [피드백 반영] 블랙 배경 & 볼드 화이트 텍스트 헤더 */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            padding: 30px 40px 20px; /* 위아래 비례감 있는 패딩 배치 */
+            padding: 35px 40px 25px; 
             display: flex;
             flex-direction: column; 
             align-items: center; 
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid #f2f2f2;
+            background-color: #000000; /* 헤더 배경 블랙 */
+            border-bottom: 1px solid #222222; /* 미세한 경계선 */
         }
 
         .logo-area {
-            margin-bottom: 15px; /* 로고와 메뉴 사이 안정적인 간격 */
+            margin-bottom: 20px; 
         }
 
+        /* [피드백 반영] 로고 글씨 두껍고 흰색 */
         .logo-area a {
-            font-size: 28px; /* 메뉴가 커진 만큼 로고도 28px로 동시 확장 */
-            font-weight: 300;
+            font-size: 30px; 
+            font-weight: 700; /* 더 두껍게 */
             text-transform: uppercase;
             letter-spacing: 0.4em;
-            color: #111111;
+            color: #ffffff; /* 흰색 글씨 */
             text-decoration: none;
+            transition: opacity 0.3s;
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 40px; /* 글자 크기에 맞춰 메뉴 간격도 넓혀 시원한 개방감 부여 */
+            gap: 45px; 
             justify-content: center; 
         }
 
-        /* [피드백 반영] 본문 대비 상단 메뉴 글씨 크기 최적화 */
+        /* [피드백 반영] 메인메뉴 글씨 두껍고 흰색 */
         nav ul li a {
-            font-size: 14px; /* 11px에서 14px로 대폭 확장하여 본문(15px)과 완벽한 균형 */
-            font-weight: 400;
+            font-size: 14px; 
+            font-weight: 600; /* 더 두껍게 */
             text-transform: uppercase;
-            letter-spacing: 0.2em; /* 크기가 커진 만큼 자간을 섬세하게 조정 */
-            color: #111111;
+            letter-spacing: 0.2em; 
+            color: #ffffff; /* 흰색 글씨 */
             text-decoration: none;
             position: relative;
             transition: color 0.3s;
         }
 
-        /* 'DUFERI STORY' 활성화 상태 밑줄 */
+        /* 'DUFERI STORY' 활성화 상태 밑줄 (흰색으로 변경) */
         nav ul li a.active {
-            font-weight: 500;
+            font-weight: 700;
         }
         nav ul li a.active::after {
             content: '';
@@ -79,13 +80,13 @@
             bottom: -6px;
             left: 0;
             width: 100%;
-            height: 1px;
-            background-color: #111111;
+            height: 2px; /* 밑줄도 조금 더 선명하게 */
+            background-color: #ffffff; /* 흰색 밑줄 */
         }
 
         /* 헤라 스타일 메인 무드 섹션 */
         .story-hero-section {
-            padding: 240px 20px 120px; /* 헤더 크기 변화에 맞춰 상단 패딩 확장 */
+            padding: 280px 20px 140px; /* 헤더 높이 확보를 위한 상단 패딩 */
             text-align: center;
             background-color: #ffffff;
         }
@@ -96,7 +97,7 @@
         }
 
         .hero-title {
-            font-size: 44px;
+            font-size: 46px;
             font-weight: 300;
             letter-spacing: 0.15em;
             text-transform: uppercase;
@@ -105,12 +106,11 @@
             line-height: 1.3;
         }
 
-        /* 본문 대중성 및 시인성 확보 */
         .hero-description {
-            font-size: 15px; /* 본문 기준 크기 */
+            font-size: 16px; 
             color: #555555;
             letter-spacing: 0.03em;
-            line-height: 2.2;
+            line-height: 2.3;
             word-break: keep-all; 
         }
 
@@ -127,9 +127,8 @@
             margin: 0 auto;
         }
 
-        /* [경로 수정] 듀페리 시그니처 로고 배치 */
         .belief-logo-wrapper {
-            width: 220px;
+            width: 240px;
             margin: 0 auto 60px;
         }
         .belief-logo-wrapper img {
@@ -139,7 +138,7 @@
         }
 
         .belief-title {
-            font-size: 30px;
+            font-size: 32px;
             font-weight: 300;
             text-transform: uppercase;
             letter-spacing: 0.3em;
@@ -147,10 +146,10 @@
         }
 
         .belief-description {
-            font-size: 15px; /* 블랙 섹션 본문도 15px로 통일 */
+            font-size: 16px; 
             color: #cccccc;
             letter-spacing: 0.03em;
-            line-height: 2.2;
+            line-height: 2.3;
             word-break: keep-all;
         }
 
@@ -168,17 +167,13 @@
 
         /* 반응형 모바일 대응 */
         @media (max-width: 768px) {
-            header { padding: 20px 20px 15px; }
-            .logo-area { margin-bottom: 10px; }
-            .logo-area a { font-size: 22px; }
+            header { padding: 25px 20px 20px; }
+            .logo-area { margin-bottom: 12px; }
+            .logo-area a { font-size: 24px; }
             nav ul { gap: 15px; flex-wrap: wrap; }
             nav ul li a { font-size: 11px; }
-            .story-hero-section { padding: 18px 10px 80px; }
-            .hero-title { font-size: 28px; margin-bottom: 25px; }
-            .hero-description { font-size: 13px; }
-            .story-belief-section { padding: 100px 10px; }
-            .belief-title { font-size: 22px; margin-bottom: 25px; }
-            .belief-description { font-size: 13px; }
+            .story-hero-section { padding: 200px 10px 80px; }
+            .hero-title { font-size: 30px; }
         }
     </style>
 </head>
@@ -211,7 +206,7 @@
     <section class="story-belief-section">
         <div class="belief-content">
             <div class="belief-logo-wrapper">
-                <img src="../images/brand_story_brand_belief_logo_pc_kr_240312.png" alt="DUFERI BRAND BELIEF LOGO">
+                <img src="../../images/brand_story_brand_belief_logo_pc_kr_240312.png" alt="DUFERI BRAND BELIEF LOGO">
             </div>
             
             <h2 class="belief-title">DUFERI</h2>
