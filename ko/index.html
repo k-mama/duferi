@@ -22,7 +22,7 @@
         }
 
         /* ==========================================================
-           [루이비통 핵심 복제] 1열 구조의 슬림 반전 토글 헤더 (메인메뉴 완전 삭제)
+           [루이비통 핵심 복제] 1열 구조의 슬림 반전 토글 헤더 (메인메뉴 배제)
            ========================================================== */
         header {
             position: fixed;
@@ -30,15 +30,14 @@
             left: 0;
             width: 100%;
             z-index: 1000;
-            background-color: transparent; /* 평소 투명 */
-            color: #ffffff; /* 평소 화이트 */
+            background-color: transparent; 
+            color: #ffffff; 
             transition: background-color 0.35s cubic-bezier(0.25, 1, 0.5, 1), 
                         color 0.35s cubic-bezier(0.25, 1, 0.5, 1),
                         border-color 0.35s ease;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* 호버 시 0.1초 만에 화이트 명품관 배경으로 반전 */
         header:hover {
             background-color: #ffffff; 
             color: #111111; 
@@ -53,7 +52,6 @@
             align-items: center;
         }
 
-        /* 좌측 영역: 메뉴 & 검색 */
         .header-left-zone {
             display: flex;
             align-items: center;
@@ -85,7 +83,6 @@
             stroke-width: 1.5;
         }
 
-        /* 중앙 영역: 가늘고 수려한 오리지널 로고 */
         .header-center-zone {
             text-align: center;
             display: flex;
@@ -95,7 +92,7 @@
 
         .header-center-zone a {
             font-size: 28px; 
-            font-weight: 200; /* 초슬림 타이포 */
+            font-weight: 200; 
             text-transform: uppercase;
             letter-spacing: 0.4em;
             color: inherit; 
@@ -103,7 +100,6 @@
             text-indent: 0.4em; 
         }
 
-        /* 우측 영역: 유틸리티 팩 */
         .header-right-zone {
             display: flex;
             align-items: center;
@@ -131,7 +127,6 @@
         }
         .utility-icon-link:hover { transform: scale(1.05); }
 
-        /* 쇼핑백 가방 우측 상단 배지 '0' */
         .cart-badge {
             position: absolute;
             top: -2px;
@@ -152,7 +147,6 @@
             color: #ffffff;
         }
 
-        /* 지구본 다국어 드롭다운 */
         .lang-selector-container { position: relative; }
         .lang-dropdown-menu {
             display: none;
@@ -180,7 +174,7 @@
         header:hover .lang-dropdown-menu li a { color: #111111; }
 
         /* ==========================================================
-           [루이비통 완벽 복제] 가로 폭 100% 시네마틱 풀 비디오 히어로 섹션
+           [비주얼 매핑] 가로폭 100% 대응 아우디 세단 풀 비디오 히어로 섹션
            ========================================================== */
         .story-hero-section {
             position: relative;
@@ -192,11 +186,10 @@
             justify-content: center;
             align-items: flex-end; 
             text-align: center;
-            padding-bottom: 90px; 
+            padding-bottom: 95px; /* 하단 2줄 레이아웃 안정감을 위해 여백 세밀 조정 */
             color: #ffffff;
         }
 
-        /* 화면 가로폭 길이에 자동 리스폰시브 매칭되는 비디오 스트림 */
         .cinematic-stream {
             position: absolute;
             top: 50%;
@@ -208,27 +201,25 @@
             z-index: 1;
         }
 
-        /* 자막 및 메뉴 가독성을 위한 상하단 미세 그라데이션 필터 */
         .hero-video-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.4) 100%);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.45) 100%);
             z-index: 2;
         }
 
-        /* [요청 반영] 비디오 내부 하단 정렬 텍스트 & 메뉴 그룹 */
         .hero-title-group {
             position: relative;
             z-index: 3;
             max-width: 800px;
             margin: 0 auto;
-            text-shadow: 0 2px 14px rgba(0,0,0,0.3);
+            text-shadow: 0 2px 14px rgba(0,0,0,0.25);
         }
 
-        /* 여성 ➡️ 옴므 교정 완료 */
+        /* 옴므 반영 완료 */
         .hero-subtitle {
             font-size: 14px;
             font-weight: 400;
@@ -237,34 +228,57 @@
             text-transform: uppercase;
         }
 
-        /* SS26 리조트 ➡️ SS26 기프트 컬렉션 교정 완료 */
+        /* SS26 기프트 컬렉션 반영 완료 */
         .hero-title {
             font-size: 42px; 
             font-weight: 700; 
             letter-spacing: 0.08em;
             text-transform: uppercase;
             line-height: 1.2;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
 
-        /* [요청 반영] 기존 '컬렉션 보기' 자리에 배치된 듀페리 5대 카테고리 링크 바 */
-        .hero-action-links {
+        /* ==========================================================
+           [요청 반영] 2줄 구성 + 얇은 폰트 + 밑줄 제거 히어로 메뉴 아키텍처
+           ========================================================== */
+        .hero-action-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px; /* 1단과 2단 사이의 우아한 수직 공백 간격 */
+        }
+
+        .hero-action-row {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 40px; /* 글자 사이의 시원한 수평 여백 배치 */
         }
 
-        .hero-action-links a {
+        .hero-action-row a {
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 300; /* [피드백] 볼드 없이 극도로 가늘고 정갈한 서체 기용 */
             color: #ffffff;
-            text-decoration: none;
-            border-bottom: 1px solid #ffffff; /* 우아한 화이트 하단 선 복제 */
-            padding-bottom: 4px;
-            letter-spacing: 0.05em;
-            transition: opacity 0.2s;
+            text-decoration: none; /* [피드백] 밑줄 완전 제거 */
+            border-bottom: none;   /* [피드백] 밑줄 보더 완전 제거 */
+            padding-bottom: 0;
+            letter-spacing: 0.1em;
+            transition: opacity 0.3s ease;
         }
-        .hero-action-links a:hover { opacity: 0.7; }
+
+        /* 상단 1라인: 활성화 메인 동선 */
+        .hero-action-row.line-1 a {
+            opacity: 0.95;
+        }
+        .hero-action-row.line-1 a:hover {
+            opacity: 0.7;
+        }
+
+        /* 하단 2라인: 미출시 카테고리 (도드라지지 않게 은은한 명도 차등 부여) */
+        .hero-action-row.line-2 a {
+            opacity: 0.35; /* 얇은 폰트와 결합하여 시선 분산을 완벽하게 억제 */
+            cursor: default;
+            pointer-events: none; /* 클릭 방지 */
+        }
 
         /* 2번 섹션: 화이트 비리프 서사 단락 */
         .story-belief-section {
@@ -327,7 +341,8 @@
             .header-center-zone a { font-size: 22px; }
             .icon-text-btn span { display: none; }
             .hero-title { font-size: 26px; }
-            .hero-action-links { flex-wrap: wrap; gap: 15px; }
+            .hero-action-row { gap: 20px; }
+            .hero-action-row a { font-size: 12px; }
             .footer-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -388,12 +403,17 @@
         <div class="hero-title-group">
             <p class="hero-subtitle">옴므</p>
             <h1 class="hero-title">SS26 기프트 컬렉션</h1>
-            <div class="hero-action-links">
-                <a href="./brand-story.html">듀페리 스토리</a>
-                <a href="./homme.html">옴므</a>
-                <a href="#">스킨케어</a>
-                <a href="#">오브제</a>
-                <a href="#">기프트</a>
+            
+            <div class="hero-action-container">
+                <div class="hero-action-row line-1">
+                    <a href="./brand-story.html">듀페리 스토리</a>
+                    <a href="./homme.html">옴므</a>
+                </div>
+                <div class="hero-action-row line-2">
+                    <a href="#">스킨케어</a>
+                    <a href="#">오브제</a>
+                    <a href="#">기프트</a>
+                </div>
             </div>
         </div>
     </section>
@@ -430,7 +450,7 @@
                         <li><a href="#">캠페인 라이브러리</a></li>
                     </ul>
                 </div>
-                <div class="footer-grid-item footer-column">
+                <div class="footer-column">
                     <h3>사이트맵</h3>
                     <ul>
                         <li><a href="./homme.html">옴므 (HOMME)</a></li>
