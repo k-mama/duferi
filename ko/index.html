@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DUFERI 공식 온라인 스토어</title>
+    <style>
+        /* 하이엔드 럭셔리 미니멀리즘 베이스 세팅 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #111111;
+            font-family: "Didot", "Playfair Display", "Apple SD Gothic Neo", sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* 명품관 아이덴티티를 담은 상단 내비게이션 바 */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #f2f2f2;
+        }
+
+        .logo-area a {
+            font-size: 24px;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            color: #111111;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 45px;
+        }
+
+        nav ul li a {
+            font-size: 11px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: #111111;
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: #111111;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* 루이비통 스타일: 화면을 압도하는 웅장한 히어로 섹션 */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-color: #fafafa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero-bg-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #eaeaea 0%, #f9f9f9 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero-subtitle {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5em;
+            color: #666666;
+            margin-bottom: 25px;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero-title {
+            font-size: 42px;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            line-height: 1.4;
+            margin-bottom: 35px;
+            color: #111111;
+            animation: fadeInUp 1.2s ease forwards;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: #ffffff;
+            background-color: #111111;
+            padding: 18px 45px;
+            text-decoration: none;
+            border: 1px solid #111111;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            animation: fadeInUp 1.4s ease forwards;
+        }
+
+        .hero-btn:hover {
+            background-color: transparent;
+            color: #111111;
+        }
+
+        /* 시크한 미니멀 푸터 */
+        footer {
+            padding: 60px 40px;
+            background-color: #ffffff;
+            border-top: 1px solid #f2f2f2;
+            text-align: center;
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            color: #888888;
+            line-height: 2;
+        }
+
+        /* 애니메이션 효과 */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 반응형 모바일 대응 */
+        @media (max-width: 768px) {
+            header { padding: 20px; flex-direction: column; gap: 20px; }
+            nav ul { gap: 20px; flex-wrap: wrap; justify-content: center; }
+            .hero-title { font-size: 28px; }
+            .hero-btn { padding: 15px 35px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">
+            <a href="./index.html">DUFERI</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="./brand-story.html">STORY</a></li>
+                <li><a href="./homme.html">HOMME</a></li>
+                <li><a href="./skincare.html">SKINCARE</a></li>
+                <li><a href="./objets.html">OBJETS</a></li>
+                <li><a href="./gift.html">GIFT</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-bg-placeholder"></div>
+        <div class="hero-content">
+            <p class="hero-subtitle">The New Chapter</p>
+            <h1 class="hero-title">정제된 아우라,<br>시그니처 옴므 컬렉션 런칭</h1>
+            <a href="./homme.html" class="hero-btn">컬렉션 자세히 보기</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 DUFERI. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
